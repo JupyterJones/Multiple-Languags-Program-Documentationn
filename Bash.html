@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<head>
+<title>BASH info </title>
+<style>
+/*
+ Theme Name:     BlogBlock Doc ver 2.04
+ Theme URI:      http://www.philippineblogdesign.com
+ Description:    BlogBlock Blog theme Document Creation
+ Author:         Jack Northrup
+ Author URI:     http://jacknorthrup.com
+ Template:       Make A Doc
+ Version:        3.0.4
+*/
+html{
+margin:10px;
+padding:10px;
+background-image: url(comment-file-background.jpg);
+}
+body{
+    font-size:24px;
+    padding: 20px,20px,20px,20px;
+    margin: 20px,20px,20px,20px;
+}
+h1, h2, h3, h4, h5, h6,
+article, applet,  audio,  body, caption, center,
+del, dd, div, dl, dt, em, embed, footer, form, header, html,
+i, iframe, input, img, label, li, legend, menu, nav, ol,
+object, output, p, section, select, span, table, tbody, textarea, tfoot, thead, tr, th, td, ul, video {
+margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit;}
+article,footer, header, menu, nav, section { display: block;}
+a {margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit;
+color: inherit; outline: none; text-decoration: none;}
+blockquote, q {quotes: none;}
+body {line-height: 1;}
+caption, th {text-align:center;}
+img {border: 0;}
+legend {color: #000;}
+ol, ul {list-style: none;}
+table {border-collapse: collapse; border-spacing: 0;}
+@font-face {
+ font-family: 'Cookie-Regular';
+ font-style: normal;
+ font-weight: 400;
+ src: url('../fonts/Cookie-Regular.ttf');
+}
+@font-face {
+font-family: 'Sofia-Regular';
+font-style: normal;
+font-weight: 400;
+src: url('Sofia-Regular.ttf');
+}
+
+p{
+text-align:justify;
+text-justify:inter-word;
+}
+textarea {
+    resize: none;
+    border:1px solid gray;
+border-radius:8px;}
+.class-font-18{
+    font-size: 18px;
+}
+.class-font-22{
+    font-size: 22px;
+    text-align: center;
+}
+.class-font-25{
+    font-size: 25px;
+    text-align: center;
+}
+.notice{
+    text-decoration:underline;
+    color:red}
+h2{margin-left:1%}
+#wrapper{
+margin:15px auto;
+width:89%;
+max-width:1200px;
+height:auto;
+min-height:2350px;
+padding-top:25px;
+padding-right:3.5%;
+padding-left:3.5%;
+padding-bottom:15px;
+background-color: #6F926C;
+border:1px solid gray;
+border-radius:8px;
+}
+#header{
+margin: 0 auto;
+width:100%;
+min-height:230px;
+border:1px solid gray;
+border-radius:8px;
+background: #B4CCAF; 
+margin-bottom:10px;
+}
+#header h1{
+width:52%;
+padding:2px;
+margin-left:.2em;
+margin-top: .2em;
+padding: 15px;
+border:1px solid gray;
+border-radius:8px;
+background: #96B290;
+word-wrap: break-word;
+color:yellow;
+}
+#content{
+margin:10px auto;
+width:98%;
+min-height:700px;
+height:auto;
+border:2px solid #F0F0E1;
+}
+#read-search{
+margin:10px auto;
+width:94%;
+padding:10px;
+overflow-y: scroll;
+height:1400px;
+border-top:2px solid gray;
+border-bottom:2px solid gray;
+border-left:1px solid gray;
+}
+textarea {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    max-width: 80%;
+}
+input[name="title"] {
+    border: 1px solid #BDBBBB;
+    font-size: 16px;
+    padding: .5%;
+    width: 99%;
+    border:1px solid gray;
+border-radius:5px;
+}
+input[name="submit"]{
+border: 1px solid #BDBBBB;
+    font-size: 16px;
+    padding: .5%;
+    width: 100px;
+    border:1px solid gray;
+border-radius:5px;
+}
+#nav{
+margin:2px auto;
+width:98%;
+min-height:25px;
+}
+#nav ul li{
+  padding: 0;
+  list-style-type: none;
+  display:inline;
+}
+#nav li{
+padding-left:1em;
+}
+#nav li a{
+font-size:14px;
+padding:.2em;
+color: gray;
+}
+#nav li a:hover{
+color:#4CD2FF;
+border:1px solid gray;
+}
+#nav .notice{
+ text-decoration:underline;
+    color:red}
+#nav .class-font-22{
+  font-size: 22px;
+    text-align: center;    
+}
+#nav .class-font-22:hover{
+  font-size: 22px;
+    text-align: center;    
+    color:black;
+}
+#nav .class-font-18:hover{
+  font-size: 22px;
+    text-align: center;    
+    color:black;
+}
+.menu-top{
+width:55%;
+margin-top:5px;
+padding-top:5px;
+float:left;
+min-height:60px;
+}
+.menu-bottom{
+width:100%;
+min-width:100px;
+text-align:right;
+font-size:1em;
+margin-top:15px;
+float:right;
+font-family: "Trebuchet MS", Helvetica, sans-serif;
+color:#000;
+padding-right:2%;
+min-height:40px;
+}
+#post{
+margin-top:20px auto;
+margin-bottom: 15px;
+width:92%;
+padding: 4%;
+height:700px;
+border:1px solid gray;
+border-radius:8px;
+background: #B4CCAF; 
+}
+#read-text{
+margin:20px auto;
+width:90%;
+height:120px;
+border: 1px solid gray;
+}
+#read-only{
+margin-top:10px;
+overflow-y: scroll;
+height:1560px;
+border-top: 2px solid black;
+border-bottom: 2px solid black;
+}
+#read{
+margin-top:20px auto;
+margin-bottom: 15px;
+width:92%;
+padding: 4%;
+height: 1000px;
+overflow-y: scroll;
+border:1px solid gray;
+border-radius:8px;
+background: #B4CCAF;
+background-image: url( legal-paper.jpg);
+ /* Old browsers */
+}
+#read p{
+    font-size:22px;
+}
+#read h1{
+  font-size:2.2em;
+  color: #795209;
+}
+#read h2{
+  font-size:2.2em;
+}
+#read a{
+  color:navy;    
+}
+
+
+#center-column{
+margin:20px auto;
+width:92%;
+height:auto;
+min-height:1825px;
+overflow:hidden;
+border:1px solid gray;
+border-radius:8px;
+background: lightgray; /* Old browsers */
+}
+#center-column p{
+color:#464637;
+font-size:1em;
+background-color:lightgray;
+padding:3px;}
+#center-column h3{
+margin-top:15px;
+margin-bottom:5px;
+padding-left:3%;
+font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+font-size:1.4em;
+color:#DFDFD0;
+}
+#footer{
+margin-top:20px auto;
+width:92%;
+padding: 4%;
+min-height:230px;
+border:1px solid gray;
+border-radius:8px;
+background: #B4CCAF; 
+}
+.g-person-box{
+  margin:10px auto;
+  min-height:140px;
+  width:300px;
+  overflow:hidden;
+}
+
+
+
+</style>
+</head>
+<body>
+<div id="wrapper">
+<div id="header" style = "padding:15px;margin:10px;"><h1 class="class-font-22">BlogBlocks NoteTaker 104</h1>
+
+<p class="class-font-18" style = "margin:10px;">BlogBlocks NoteTaker 104 is an HTML based online notebook. Entries or posts are made from a password protected page.
+ The entries are saved and viewed as an HTML page. Being viewed as an CSS formated HTML allows astounding contol available to create beautiful
+ backgrounds and text layout, embed Playable MP3, YouTube Videos, and Flash.</p>
+<p style = "margin:10px;"> Notes by Jack Northrup</p>
+</div>
+<p><a href = "https://www.cyberciti.biz/faq/unix-linux-get-the-contents-of-a-webpage-in-a-terminal/">https://www.cyberciti.biz/faq/unix-linux-get-the-contents-of-a-webpage-in-a-terminal/</a></p>
+<pre>
+page="$(wget -O - http://www.cyberciti.biz)"
+## display page ##
+echo "$page"
+## or pass it to lynx / w3m ##
+echo "$page" | w3m -dump -T text/html
+echo "$page" | lynx -dump -stdin
+
+------
+</pre>
+
+
+
+<div id="read">
+
+<h2>list a programs dependencies</h2>
+
+<pre>
+jack@jack-desktop:~/robomongo-1.0.0-linux-x86_64-89f24ea/bin$ <b>ldd ./robomongo</b>
+	linux-vdso.so.1 =>  (0x00007ffe043b2000)
+	libQt5Network.so.5 => /home/jack/robomongo-1.0.0-linux-x86_64-89f24ea/bin/./../lib/libQt5Network.so.5 (0x00007f3376928000)
+	libQt5Widgets.so.5 => /home/jack/robomongo-1.0.0-linux-x86_64-89f24ea/bin/./../lib/libQt5Widgets.so.5 (0x00007f33760d8000)
+	libQt5Gui.so.5 => /home/jack/robomongo-1.0.0-linux-x86_64-89f24ea/bin/./../lib/libQt5Gui.so.5 (0x00007f3375930000)
+	libQt5Core.so.5 => /home/jack/robomongo-1.0.0-linux-x86_64-89f24ea/bin/./../lib/libQt5Core.so.5 (0x00007f3375215000)
+	libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f3374fd8000)
+	libssl.so.1.0.0 => /home/jack/robomongo-1.0.0-linux-x86_64-89f24ea/bin/./../lib/libssl.so.1.0.0 (0x00007f3374d69000)
+	libcrypto.so.1.0.0 => /home/jack/robomongo-1.0.0-linux-x86_64-89f24ea/bin/./../lib/libcrypto.so.1.0.0 (0x00007f3374985000)
+	libstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f33745fa000)
+	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f33742f1000)
+	libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f33740da000)
+	libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f3373ebc000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f3373af3000)
+</pre>
+<pre>
+
+You can display the octal permissions for a file using the stat command:
+
+stat -c %a [filename]
+
+EXAMPLE:
+~/vcn$ stat -c %a ~/.ssh/id_rsa.pub
+777
+
+
+Or by using find:
+
+find [path] -printf '%m %p\n'
+
+Example:
+root@NS2:/var/www/example.com/public_html/papers# find . -printf '%m %p\n'
+755 .
+777 ./comment-file-reader-only.php
+777 ./comment-file-nav.php
+777 ./comment-file-background.jpg
+777 ./comment-read-only-nav.php
+777 ./admin-login.php
+755 ./includes
+644 ./includes/loginphp5.php
+644 ./includes/comment-file-reader-only.php
+644 ./includes/comment-file-nav.php
+644 ./includes/comment-file-background.jpg
+
+
+
+
+
+
+
+</pre>
+
+<h1>Desktop Noticication</h1>
+notify-send 'Hello world!' 'This is an example notification.' --icon=dialog-information <br />
+<p>This will place an icon on your desktop. I use them as Desktop reminders. just enter  notify-send -h    for help as to how to use it.
+
+
+
+<pre>
+caffe stuff
+
+hecking dependency style of gcc... (cached) gcc3
+checking how to run the C preprocessor... gcc -E
+checking how to run the C++ preprocessor... /lib/cpp
+configure: error: in `/protobuf-3.2.0':
+configure: error: C++ preprocessor "/lib/cpp" fails sanity check
+See `config.log' for more details
+root@413042c78bf0:/protobuf-3.2.0# sudo apt get install gcc
+bash: sudo: command not found
+root@413042c78bf0:/protobuf-3.2.0# apt-get install gcc
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+gcc is already the newest version (4:5.3.1-1ubuntu1).
+gcc set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 10 not upgraded.
+root@413042c78bf0:/protobuf-3.2.0# apt-get install g++
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  g++-5 libstdc++-5-dev
+Suggested packages:
+  g++-multilib g++-5-multilib gcc-5-doc libstdc++6-5-dbg libstdc++-5-doc
+The following NEW packages will be installed:
+  g++ g++-5 libstdc++-5-dev
+0 upgraded, 3 newly installed, 0 to remove and 10 not upgraded.
+Need to get 9727 kB of archives.
+After this operation, 39.0 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libstdc++-5-dev amd64 5.4.0-6ubuntu1~16.04.4 [1426 kB]
+Get:2 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 g++-5 amd64 5.4.0-6ubuntu1~16.04.4 [8300 kB]    
+Get:3 http://archive.ubuntu.com/ubuntu xenial/main amd64 g++ amd64 4:5.3.1-1ubuntu1 [1504 B]                     
+Fetched 9727 kB in 40s (238 kB/s)                                                                                
+debconf: delaying package configuration, since apt-utils is not installed
+Selecting previously unselected package libstdc++-5-dev:amd64.
+(Reading database ... 11993 files and directories currently installed.)
+Preparing to unpack .../libstdc++-5-dev_5.4.0-6ubuntu1~16.04.4_amd64.deb ...
+Unpacking libstdc++-5-dev:amd64 (5.4.0-6ubuntu1~16.04.4) ...
+Selecting previously unselected package g++-5.
+Preparing to unpack .../g++-5_5.4.0-6ubuntu1~16.04.4_amd64.deb ...
+Unpacking g++-5 (5.4.0-6ubuntu1~16.04.4) ...
+Selecting previously unselected package g++.
+Preparing to unpack .../g++_4%3a5.3.1-1ubuntu1_amd64.deb ...
+Unpacking g++ (4:5.3.1-1ubuntu1) ...
+Setting up libstdc++-5-dev:amd64 (5.4.0-6ubuntu1~16.04.4) ...
+Setting up g++-5 (5.4.0-6ubuntu1~16.04.4) ...
+Setting up g++ (4:5.3.1-1ubuntu1) ...
+update-alternatives: using /usr/bin/g++ to provide /usr/bin/c++ (c++) in auto mode
+root@413042c78bf0:/protobuf-3.2.0# 
+Caffe stuff
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Looks to me like Make links python/caffe/_caffe.so to build/lib/libcaffe.so correctly:
+
+$ ldd python/caffe/_caffe.so  | grep caf
+    libcaffe.so.1.0.0-rc3 => /home/lyeager/caffe/caffe/python/caffe/../../build/lib/libcaffe.so.1.0.0-rc3 (0x00007fa439e55000)
+
+
+
+
+
+
+
+
+ldd python/caffe/_caffe.so  | grep caf
+    libcaffe.so.1.0.0-rc3 => /home/lyeager/caffe/caffe/python/caffe/../../build/lib/libcaffe.so.1.0.0-rc3 (0x00007fa439e55000)
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/libstdc++.so.6
+./matlab
+
+
+
+
+
+
+
+
+
+
+Sym Links:
+
+libstdc++.so.6
+
+ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /usr/lib/
+
+/home/jack/anaconda2/envs/py27/lib/
+
+ln -s <real folder> <link folder>
+
+
+
+How do you view file permissions?
+ $ ls -l /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.22
+response:
+-rw-r--r-- 1 root root 1590744 Sep  5  2016 /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.22
+ Change Permissions:
+
+To change A file or directory:
+ $ chmod 755 /opt/lampp/htdocs 
+ --
+ To change ALLthe directories to 755 (drwxr-xr-x):
+
+$ find /opt/lampp/htdocs -type d -exec chmod 755 {} \;
+
+To change ALL the files to 644 (-rw-r--r--):
+
+$ find /opt/lampp/htdocs -type f -exec chmod 644 {} \;
+
+
+
+
+
+to inspect versions in file:
+
+strings /home/jack/anaconda2/lib/libstdc++.so.6 | grep GLIBCXX 
+strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep GLIBXX
+
+Example - libstdc++.so.6:
+jack@jack-desktop:~/Desktop/Ubuntu16.04/notebooks$ strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep GLIBCXX
+GLIBCXX_3.4
+GLIBCXX_3.4.1
+GLIBCXX_3.4.2
+GLIBCXX_3.4.3
+GLIBCXX_3.4.4
+GLIBCXX_3.4.5
+GLIBCXX_3.4.6
+GLIBCXX_3.4.7
+GLIBCXX_3.4.8
+GLIBCXX_3.4.9
+GLIBCXX_3.4.10
+GLIBCXX_3.4.11
+GLIBCXX_3.4.12
+GLIBCXX_3.4.13
+GLIBCXX_3.4.14
+GLIBCXX_3.4.15
+GLIBCXX_3.4.16
+GLIBCXX_3.4.17
+GLIBCXX_3.4.18
+GLIBCXX_3.4.19
+GLIBCXX_3.4.20
+GLIBCXX_3.4.21
+GLIBCXX_3.4.22
+GLIBCXX_DEBUG_MESSAGE_LENGTH
+
+
+
+
+remove extensions:
+
+for file in *.old; do
+    mv -- "$file" "${file%%.old}"
+done
+
+----------------
+jack@jack-desktop:~/git/caffe$ locate opencv.pc/home/jack/anaconda2/pkgs/opencv-3.1.0-np112py27_1/lib/pkgconfig/opencv.pc
+
+/home/jack/anaconda2/pkgs/qt-5.6.2-3/lib/pkgconfig/
+
+ln -s /home/jack/anaconda2/pkgs/opencv-3.1.0-np112py27_1/lib/pkgconfig/opencv.pc /usr/lib/pkgconfig
+
+See man ln. To create symlink /usr/bin/bar --> /opt/foo, (i.e., create symlink at /usr/bin/bar which references to file /opt/foo) do:
+
+ln -s /opt/foo /usr/bin/bar
+
+You would need to apply the above command as root (with sudo).
+
+------------
+
+
+
+As you noticed, you can define some log functions like log, log_debug, log_error, etc.
+
+function log () {
+    if [[ $_V -eq 1 ]]; then
+        echo "$@"
+    fi
+}
+
+It can help increasing your main code readability and hide show\nonshow logic into logging function.
+-----------------------
+To get verbose response to running a script:
+
+set -x or set -o xtrace expands variables and prints a little + sign before the line.
+
+set -v or set -o verbose does not expand the variables before printing.
+
+Use set +x and set +v to turn off the above settings.
+
+On the first line of the script, one can put 
+----------- file heading
+#!/bin/sh -x 
+
+
+
+to have the same effect as set -x later in the script.
+
+
+
+
+
+name=somefile
+if [[ -e $name.ext ]] ; then
+    i=0
+    while [[ -e $name-$i.ext ]] ; do
+        let i++
+    done
+    name=$name-$i
+fi
+touch "$name".ext
+</pre>
+<h1>Using yam : Example</h1>
+<pre>
+#!/bin/bash
+#Create Gui Buttons and assign vals for var
+while true
+do
+  #everything goes here
+
+
+    val=$(yad --center --width=300 --height=100 --title "GNUsual" --image "/mnt/foo.png" --text="Choose a Multicast to view:" \
+    --button="Eclipse":1 \
+    --button="DeepDream":2 \
+    --button="NED":3 \
+    --button="PASSWORDS":4 ) \
+
+    ret=$?
+    #responses to above button presses are below
+    if [[ $ret -eq 1 ]]; then
+    eclipse
+    #Insert troubleshooting gui-utility commands here
+    fi
+
+    if [[ $ret -eq 2 ]]; then
+    docker run -d -p 443:8888 -e "PASSWORD=password" -v $(pwd)/Ubuntu16.04/deep-dream-generator:/src ryankennedyio/deepdream
+    #Insert troubleshooting gui-utility commands here
+    fi
+
+    if [[ $ret -eq 3 ]]; then
+    ined
+    #Insert troubleshooting gui-utility commands here
+    fi
+
+    if [[ $ret -eq 4 ]]; then
+    pw
+    #Insert troubleshooting gui-utility commands here
+    fi
+
+done
+</pre>
+
+</div>
+</div>
+</body>

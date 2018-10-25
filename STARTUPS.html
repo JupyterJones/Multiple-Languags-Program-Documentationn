@@ -1,0 +1,36 @@
+
+
+
+<pre fontsize="1.5em">
+#!/bin/bash
+
+Think Good !
+docker run --name image-processing -d -p 443:8888 -e "PASSWORD=password" -v $(pwd)/notebooks:/notebooks
+
+#!/bin/bash
+#docker run --name notebook-experim -d -p 443:8888 -e "PASSWORD=password" -v $(pwd)/notebooks:/notebooks
+
+docker run -v /home/jack/:/key.pem -v $(pwd)/notebooks:/notebooks -d -p 443:8888 -e "PASSWORD=pass" jacknorthrup/darkroom:latest jupyter notebook
+
+#!/bin/bash
+
+Think Good !
+docker run --name image-processing -d -p 443:8888 -e "PASSWORD=password" -v $(pwd)/notebooks:/notebooks
+
+#!/bin/bash
+#docker run --name notebook-experim -d -p 443:8888 -e "PASSWORD=password" -v /h$
+
+docker run -v /home/jack/key.pem:/key.pem -v $(pwd)/notebooks:/notebooks -d -p 443:8888 -e "PASSWORD=pass" jacknorthrup/darkroom:latest
+
+mkdir -p .eclipse-docker docker run -ti --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v `pwd`/.eclipse-docker:/home/developer -v `pwd`:/workspace fgrehm/eclipse:v4.4.1
+
+mkdir -p .eclipse-docker docker run -ti --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v $(pwd)/.eclipse-docker:/home/developer -v $(pwd):/workspace eclipse/ubuntu_jdk8
+
+docker run -ti --name test -v $(pws)/Dockerfiles:/home eclipse/ubuntu_jdk8
+
+docker run -ti --rm -e DISPLAY=$DISPLAY  -v /tmp/.X11-unix:/tmp/.X11-unix -v $(pwd)/.eclipse-docker:/home/developer -v $(pw):/workspace 
+
+
+
+
+</pre>

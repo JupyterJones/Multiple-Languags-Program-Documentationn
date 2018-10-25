@@ -1,0 +1,13 @@
+
+
+<h2>Make Yourself Mongo Admin</h2>
+<pre>
+use admin
+db.createUser(
+  {
+    user: "jack",
+    pwd: "desktop-password",
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+  }
+)
+</pre>

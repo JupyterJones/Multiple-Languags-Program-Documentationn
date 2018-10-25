@@ -1,0 +1,144 @@
+<pre>
+
+https://codeblog.dotsandbrackets.com/persistent-data-docker-volumes/  
+
+
+docker run -d \
+  -e MYSQL_ROOT_PASSWORD=my-secret-pw \
+  -v /home/docker/mysql-data:/var/lib/mysql \
+  --name mysqlserver \
+  mysql
+
+
+  data files during upgrades, or just perform occasional backups. We can map host directory to container’s data directory, so anything mysql writes to e.g. /var/lib/mysql will end up in relative safety of host FS:
+docker run -d \
+  -e MYSQL_ROOT_PASSWORD=my-secret-pw \
+  -v /home/docker/mysql-data:/var/lib/mysql \
+  --name mysqlserver \
+  mysql
+
+docker run -d \
+  -e MYSQL_ROOT_PASSWORD=my-secret-pw \
+  -v /home/docker/mysql-data:/var/lib/mysql \
+  --name mysqlserver \
+  mysql
+
+When we destroy mysqlserver, its data will survive.
+docker stop mysqlserver
+docker rm mysqlserver
+ls /home/docker/mysql-data
+#auto.cnf            client-cert.pem     ib_logfile0         mysql/              public_key.pem      sys/
+#ca-key.pem          client-key.pem      ib_logfile1         performance_schema/ server-cert.pem
+#ca.pem              ib_buffer_pool      ibdata1             private_key.pem     server-key.pem
+
+docker stop mysqlserver
+docker rm mysqlserver
+ls /home/docker/mysql-data
+#auto.cnf            client-cert.pem     ib_logfile0         mysql/              public_key.pem      sys/
+#ca-key.pem          client-key.pem      ib_logfile1         performance_schema/ server-cert.pem
+#ca.pem              ib_buffer_pool      ibdata1             private_key.pem     server-key.pem
+
+Now we can start new mysql container, mount the same data directory to it and continue as if nothing has happened.
+</pre>
+<h2>Read only Mount</h2>
+<pre>
+docker run -v /home/docker/www:/usr/share/nginx/html:ro
+
+
+
+docker inspect mysqlserver
+#    ...
+#    "Mounts": [
+#            {
+#                "Source": "/home/docker/mysql-data",
+#                "Destination": "/var/lib/mysql",
+#                "RW": true,
+#                ...
+#            }
+#        ],
+#    ...
+
+-----
+
+docker run -d \
+  -e MYSQL_ROOT_PASSWORD=my-secret-pw \
+  --name mysqlserver \
+  mysql
+
+docker inspect mysqlserver
+#...
+#       "Mounts": [
+#            {
+#                "Name": "aac828f46e6ff00fedaf45bc21e89523bd57663d3d58bf0e3c73e8cb4092d768",
+#                "Source": "/mnt/sda1/var/lib/docker/volumes/aac828f46e6ff00fedaf45bc21e89523bd57663d3d58bf0e3c73e8cb4092d768/_data",
+#                "Destination": "/var/lib/mysql",
+#                ...
+#            }
+#        ],
+#...
+
+----
+
+create a volumn and a file 
+docker run \
+  -v /data \ 
+  ubuntu \
+  touch /data/README.md
+----
+
+docker volume ls
+#DRIVER              VOLUME NAME
+#local               b45436c7f8bab37c0bfe998f962001226470cbc1dfe4ac59cc0287276e3d7a64
+
+---
+
+docker run -ti \
+  -v b45436c7f8bab37c0bfe998f962001226470cbc1dfe4ac59cc0287276e3d7a64:/data \
+  ubuntu bash
+
+root@21bd05dfa2dd:/# cd /data
+root@21bd05dfa2dd:/data# ls
+README.md
+
+--
+docker run --rm \ 
+  -v b45436c7f8bab37c0bfe998f962001226470cbc1dfe4ac59cc0287276e3d7a64:/data 
+  -v $(pwd):/backup \
+  ubuntu tar cvf /backup/backup.tar /data
+
+  ---
+  Creating volumes without containers
+
+You don’t even need a container to create a volume. We could use docker volume create command to create a volume in advance and then mount it to any container that needs one. The beauty of this approach is that we can choose the volume name and once and for all get rid of that 64 chars monstrosity:
+docker volume create mysql-data
+1
+	
+docker volume create mysql-data
+
+Creating shared-storage data volumes
+
+volume create command also provides something much more powerful than just selecting a name. Until now we’ve been creating volumes that are hosted in current file system, which is not particularly scalable. In order to address that Docker supports volume plugins that enable storing volume data in other locations: Azure, DigitalOcean, and several others.
+
+Installing and configuring such plugins might be tricky sometimes, but after it’s done, using a plugin is just a matter of adding one more argument to volume create command:
+docker volume create --driver dostorage --name my-volume
+1
+	
+docker volume create --driver dostorage --name my-volume
+
+3. Volume containers
+
+There’s also old Docker pattern called data-only container. As name suggests, it’s a container with one or more attached volumes, who’s sole responsibility it to exist and provide that volumes for others. Container doesn’t even have to be running.
+
+Once we’ve got such container, we can attach its volumes all at once to other containers with --volumes-from argument:
+docker run -d --volumes-from mydatacontainer mysql
+1
+	
+docker run -d --volumes-from mydatacontainer mysql
+
+Honestly, I don’t see any benefits of having dedicated volume container. Same functionality could be achieved by regular data volumes with zero overhead. Maybe this feature made more sense before Docker 1.8 introduced Volumes API, but now it’s more confusing than useful.
+Summary
+
+Today we took a look at several ways to persist data inside of docker containers: host directory mount, data volume and volume container. While all three of them are supported by Docker, only the second one – data volume – looks like a ‘true’ way to do the job. After all, directory mounts work only at local host, volume containers don’t add much value comparing to named data volumes, and only data volumes work well both on local host and anywhere in the cloud, assuming you installed a plugin for that.
+
+
+</pre>

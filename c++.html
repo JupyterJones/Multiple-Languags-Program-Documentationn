@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>C++ tips and info</title>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<style>
+html{
+	background-color: white;
+}
+body{
+	padding:30px;
+	border: 1px solid black;
+	background-color: #f2f2f2;
+}
+pre{
+	text-align: left;
+	font-size:12px;
+	white-space: pre-wrap;       /* Since CSS 2.1 */
+      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+      white-space: -pre-wrap;      /* Opera 4-6 */
+      white-space: -o-pre-wrap;    /* Opera 7 */
+      word-wrap: break-word;       /* Internet Explorer 5.5+ */
+
+}
+h1{
+	margin: 0 auto;
+	text-align: center;
+	color: gray;
+	padding-right:10%;
+	padding-left:10%;
+	width:80%;
+	background-color: lightyellow;
+	border: 1px solid gray;
+}
+h2{
+	text-align: center;
+	color: red;
+}
+
+p{
+	text-align: left;
+	color: navy;
+}
+.notice{
+font-size:1.2em;
+
+
+}
+#index{
+	margin: 0 auto;
+	padding-right:10%;
+	padding-left:10%;
+	padding-top:20px;
+	padding-bottom:20px;
+	border: 1px solid gray;
+	width:80%;
+	text-align: center
+}
+</style>
+</head>
+<body>
+<h1>C++ g++ tips and info</h1>
+<p>
+Short cuts, info, extensions and cool online notebooks.
+</p>
+
+<p>
+Example header file: file.h should go to /usr/include and /usr/lib. If you use the -l option (for the libraries) it should find them from these standard places. If you include using <file.h> it should also get it from the right place.	
+
+</p>
+<pre>
+sudo apt-get install apt-file
+sudo apt-file update
+
+Find a source for _mingw.h EXAMPLE:
+root@d3d80dbbf463:/usr/include# apt-file find _mingw.h
+c2hs-doc: /usr/share/doc/c2hs-doc/tests/bugs/issue-60/_mingw.h.gz
+libopenimageio-dev: /usr/include/OpenImageIO/fstream_mingw.h
+mingw-w64-common: /usr/share/mingw-w64/include/_mingw.h
+mingw-w64-i686-dev: /usr/i686-w64-mingw32/include/_mingw.h
+mingw-w64-x86-64-dev: /usr/x86_64-w64-mingw32/include/_mingw.h
+portaudio19-doc: /usr/share/doc/portaudio19-doc/doc/html/compile_windows_mingw.html
+seqan-dev: /usr/include/seqan/platform/platform_mingw.h
+
+
+
+
+</pre>

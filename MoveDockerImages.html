@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Moving docker images location to different partition</title>
+</head>
+<h1>Moving docker images location to different partition</h1>
+<p>First backup of <em>fstab</em>  </p>
+
+<pre><code>sudo cp /etc/fstab /etc/fstab.$(date +%Y-%m-%d)  
+</code></pre>
+
+<p>Then stop docker and copy all files per <strong>rsync</strong> preserving all attributes.  </p>
+
+<pre><code>sudo service docker stop  
+sudo mkdir /usr/local/docker  
+sudo rsync -aXS /var/lib/docker/. /usr/local/docker/  
+</code></pre>
+
+<p>Now it was important to check that everything was copied right. I've did eye check, but <code>diff -r</code> command is useful to. Ok it's important to make new mount and make it durable in <em>fstab</em>. That is what was useful in my case inside of <em>fstab</em>.  </p>
+
+<pre><code># &lt;file&gt; &lt;system&gt; &lt;mount point&gt;   &lt;type&gt;  &lt;options&gt;     &lt;dump&gt;  &lt;pass&gt;
+# ...
+/usr/local/docker /var/lib/docker none bind 0 0
+</code></pre>
+
+<p>Now mount of new configuration without reboot.  </p>
+
+<pre><code>mount -a  
+</code></pre>
+</body>
+</html>

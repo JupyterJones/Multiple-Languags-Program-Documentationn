@@ -1,0 +1,123 @@
+
+
+
+
+
+
+
+<pre>
+http://programtalk.com/vs2/python/4014/caffe-tensorflow/examples/imagenet/validate.py/
+http://programtalk.com/python-examples/models.get_data_spec/
+
+-----
+
+
+MODEL_FILE = './cifar10/cifar10_full.prototxt'
+PRETRAINED_WEIGHTS = './cifar10/cifar10_full_iter_70000.caffemodel'
+MEAN_FILE = "./cifar10/mean.binaryproto"
+
+net = caffe.Classifier(MODEL_FILE, PRETRAINED_WEIGHTS)
+net.set_mode_gpu() 
+assert net.inputs == ['data']
+assert net.blobs['data'].data.shape == (1, 3, 32,32)
+assert mean.shape == (3, 32, 32)
+
+# set mean values on input layer ('data' layer)
+net.set_mean('data', mean)
+
+# subtract mean values by using preprocess method.
+# It needs to convert (N, 3, 32, 32) => (N, 32, 32, 3) for passing preprocess method
+# and preprocess method returns a matrix of (N, 3, 32, 32).
+# It needs to convert (N, 3, 32, 32) => (N, 32, 32, 3) for passing predict method.
+assert test_data.shape == (10000, 3, 32, 32)
+input_data = np.array([ net.preprocess('data', x) for x in test_data.transpose(0,2,3,1)]).transpose(0,2,3,1)
+assert input_data.shape == (10000, 32, 32, 3)
+
+# This reports 33.04% prediction error on test data.
+predictions_raw = net.predict(input_data)
+
+#The case of processing mean manually.
+
+net = caffe.Classifier(MODEL_FILE, PRETRAINED_WEIGHTS)
+---------------
+
+# subtract mean values manually
+assert test_data.shape == (10000, 3, 32, 32)
+assert mean.shape == (3, 32, 32)
+input_data = np.array([d - mean for d in test_data]).transpose(0,2,3,1)
+assert input_data.shape == (10000, 32, 32, 3)
+
+# This report 16.89% prediction error on test data
+predictions_raw = net.predict(input_data)
+</pre>
+prediction stuff:
+
+http://stackoverflow.com/questions/40273426/how-do-you-predict-in-tensorflow
+http://stackoverflow.com/questions/42211833/tensorflow-how-to-predict-with-trained-model-on-a-different-test-dataset
+<pre>
+http://places.csail.mit.edu/visualizationCNN.html
+https://github.com/torrvision/caffe
+https://github.com/torrvision/crfasrnn
+
+# Run the script with anaconda-python
+# $ /home/<path to anaconda directory>/anaconda/bin/python LmdbClassification.py
+import sys
+import numpy as np
+import lmdb
+import caffe
+from collections import defaultdict
+
+# Modify the paths given below
+deploy_prototxt_file_path = '/home/<username>/caffe/examples/cifar10/cifar10_deploy.prototxt' # Network definition file
+caffe_model_file_path = '/home/<username>/caffe/examples/cifar10/cifar10_iter_5000.caffemodel' # Trained Caffe model file
+test_lmdb_path = '/home/<username>/caffe/examples/cifar10/cifar10_test_lmdb/' # Test LMDB database path
+mean_file_binaryproto = '/home/<username>/caffe/examples/cifar10/mean.binaryproto' # Mean image file
+
+# Extract mean from the mean image file
+mean_blobproto_new = caffe.proto.caffe_pb2.BlobProto()
+f = open(mean_file_binaryproto, 'rb')
+mean_blobproto_new.ParseFromString(f.read())
+mean_image = caffe.io.blobproto_to_array(mean_blobproto_new)
+f.close()
+
+# CNN reconstruction and loading the trained weights
+net = caffe.Net(deploy_prototxt_file_path, caffe_model_file_path, caffe.TEST)
+
+count = 0
+correct = 0
+matrix = defaultdict(int) # (real,pred) -> int
+labels_set = set()
+
+lmdb_env = lmdb.open(test_lmdb_path)
+lmdb_txn = lmdb_env.begin()
+lmdb_cursor = lmdb_txn.cursor()
+
+for key, value in lmdb_cursor:
+    datum = caffe.proto.caffe_pb2.Datum()
+        datum.ParseFromString(value)
+        label = int(datum.label)
+        image = caffe.io.datum_to_array(datum)
+        image = image.astype(np.uint8)
+    out = net.forward_all(data=np.asarray([image]) - mean_image)
+    plabel = int(out['prob'][0].argmax(axis=0))
+    count += 1
+    iscorrect = label == plabel
+    correct += (1 if iscorrect else 0)
+    matrix[(label, plabel)] += 1
+    labels_set.update([label, plabel])
+
+    if not iscorrect:
+            print("\rError: key = %s, expected %i but predicted %i" % (key, label, plabel))
+        sys.stdout.write("\rAccuracy: %.1f%%" % (100.*correct/count))
+        sys.stdout.flush()
+
+print("\n" + str(correct) + " out of " + str(count) + " were classified correctly")
+print ""
+print "Confusion matrix:"
+print "(r , p) | count"
+for l in labels_set:
+    for pl in labels_set:
+        print "(%i , %i) | %i" % (l, pl, matrix[(l,pl)])
+
+
+</pre>

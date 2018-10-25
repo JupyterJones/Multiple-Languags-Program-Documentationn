@@ -1,0 +1,194 @@
+
+
+
+
+
+
+<a href="https://github.com/dtschump/CImg">CImg - C Image Library</a><br />
+<a href="https://en.wikibooks.org/wiki/C%2B%2B_Programming/Code/Standard_C_Library/Functions/scanf">Wiki Stuff C++</a><br />
+<a href="https://www.eriksmistad.no/simple-image-processing-library/#tutorial">SIPL - Installed and Working</a><br /><br />
+
+<h2>This Computer's Environment</h2><br />
+<pre>
+~/Desktop/numpy-array-filters$ g++ -v
+Using built-in specs.
+COLLECT_GCC=/usr/bin/g++-5.real
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 5.4.1-2ubuntu1~16.04' --with-bugurl=file:///usr/share/doc/gcc-5/README.Bugs --enable-languages=c,ada,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-5 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-libmpx --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-5-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-5-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-5-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Thread model: posix
+gcc version 5.4.1 20160904 (Ubuntu 5.4.1-2ubuntu1~16.04) 
+</pre>
+
+
+
+<p>
+g++ -Ipath/to/the/header program.cpp -o executable<br /><br />
+
+-I : Sets the path to the include files.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;-L : Sets the path to the libraries.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;-l : Use this library (eg. -lm to use libmath.so, -lpthread to use libpthread.so)<br /><br />
+
+&nbsp;&nbsp;&nbsp;&nbsp;You can have multiple -I, -L and -l entries.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;So, your final command should look like this:<br /><br />
+
+&nbsp;&nbsp;&nbsp;&nbsp;g++ program.cpp -o executable -I /path/to/includes -L /path/to/libraries -l library1 -l library2<br /><br /> 
+
+</p>
+
+
+
+<h2>Variables for C++ numbers ( % Format Specifiers ):</h2>
+<pre>
+The % specifiers that you can use in ANSI C are:
+
+&nbsp;&nbsp;&nbsp;&nbsp;%c char single character
+&nbsp;&nbsp;&nbsp;&nbsp;%d (%i) int signed integer
+&nbsp;&nbsp;&nbsp;&nbsp;%e (%E) float or double exponential format
+&nbsp;&nbsp;&nbsp;&nbsp;%f float or double signed decimal
+&nbsp;&nbsp;&nbsp;&nbsp;%g (%G) float or double use %f or %e as required
+&nbsp;&nbsp;&nbsp;&nbsp;%o int unsigned octal value
+&nbsp;&nbsp;&nbsp;&nbsp;%p pointer address stored in pointer
+&nbsp;&nbsp;&nbsp;&nbsp;%s array of char sequence of characters
+&nbsp;&nbsp;&nbsp;&nbsp;%u int unsigned decimal
+&nbsp;&nbsp;&nbsp;&nbsp;%x (%X) int unsigned hex value
+</pre>
+<h2>Here is a nice Image Blending program written in C++</h2><br /><br />
+
+<b> EXAMPLE PROGRAM</b><br />
+
+<pre>
+/**
+ * @function on_trackbar
+ * @brief Callback for trackbar
+ */
+void on_trackbar( int, void* )
+{
+ alpha = (double) alpha_slider/alpha_slider_max ;
+ beta = ( 1.0 - alpha );
+
+ addWeighted( src1, alpha, src2, beta, 0.0, dst);
+
+ imshow( "ImageBlend", dst );
+}
+
+int main( int argc, char** argv )
+{
+ /// Read image ( same size, same type )
+ src1 = imread("images/hicks01.jpg");
+ src2 = imread("images/hicks02.jpg");
+
+ if( !src1.data ) { printf("Error loading src1 \n"); return -1; }
+ if( !src2.data ) { printf("Error loading src2 \n"); return -1; }
+
+ /// Initialize values
+ alpha_slider = 0;
+
+ /// Create Windows
+ namedWindow("ImageBlend", 1);
+
+ /// Create Trackbars
+ char TrackbarName[50];
+ sprintf( TrackbarName, "Alpha Control is 1/100 of This Value");
+
+ createTrackbar( TrackbarName, "ImageBlend", &alpha_slider, alpha_slider_max, on_trackbar );
+
+ /// Show some stuff
+ on_trackbar( alpha_slider, 0 );
+
+ /// Wait until user press some key
+ waitKey(0);
+ return 0;
+}
+<pre><br /><br />
+
+
+COMPILE:<br />
+<pre>
+g++ ImageBlend.cpp -o ImageBlend `pkg-config opencv --cflags --libs`
+</pre>
+
+
+<h2>Tiny Render </h2>
+
+#include "tgaimage.h"
+const TGAColor white = TGAColor(255, 255, 255, 255);
+const TGAColor red   = TGAColor(255, 0,   0,   255);
+int main(int argc, char** argv) {
+        TGAImage image(100, 100, TGAImage::RGB);
+        image.set(52, 41, red);
+        image.flip_vertically(); // i want to have the origin at the left bottom corner of the image
+        image.write_tga_file("output.tga");`
+        return 0;
+}
+
+
+SYSCONF_LINK = g++
+CPPFLAGS     = -Wall -Wextra -Weffc++ -pedantic -std=c++98
+LDFLAGS      = -O3
+LIBS         = -lm
+
+DESTDIR = ./
+TARGET  = main
+
+OBJECTS := $(patsubst %.cpp,%.o,$(wildcard *.cpp))
+
+all: $(DESTDIR)$(TARGET)
+
+$(DESTDIR)$(TARGET): $(OBJECTS)
+	$(SYSCONF_LINK) -Wall $(LDFLAGS) -o $(DESTDIR)$(TARGET) $(OBJECTS) $(LIBS)
+
+$(OBJECTS): %.o: %.cpp
+	$(SYSCONF_LINK) -Wall $(CPPFLAGS) -c $(CFLAGS) $< -o $@
+
+clean:
+	-rm -f $(OBJECTS)
+	-rm -f $(TARGET)
+	-rm -f *.tga
+
+
+
+
+<pre>
+
+/Desktop/numpy-array-filters$ pkg-config --libs opencv
+
+/usr/lib/x86_64-linux-gnu/libopencv_calib3d.so -lopencv_calib3d 
+/usr/lib/x86_64-linux-gnu/libopencv_contrib.so -lopencv_contrib 
+/usr/lib/x86_64-linux-gnu/libopencv_core.so -lopencv_core 
+/usr/lib/x86_64-linux-gnu/libopencv_features2d.so -lopencv_features2d 
+/usr/lib/x86_64-linux-gnu/libopencv_flann.so -lopencv_flann 
+/usr/lib/x86_64-linux-gnu/libopencv_gpu.so -lopencv_gpu 
+/usr/lib/x86_64-linux-gnu/libopencv_highgui.so -lopencv_highgui 
+/usr/lib/x86_64-linux-gnu/libopencv_imgproc.so -lopencv_imgproc 
+/usr/lib/x86_64-linux-gnu/libopencv_legacy.so -lopencv_legacy 
+/usr/lib/x86_64-linux-gnu/libopencv_ml.so -lopencv_ml 
+/usr/lib/x86_64-linux-gnu/libopencv_objdetect.so -lopencv_objdetect 
+/usr/lib/x86_64-linux-gnu/libopencv_ocl.so -lopencv_ocl 
+/usr/lib/x86_64-linux-gnu/libopencv_photo.so -lopencv_photo 
+/usr/lib/x86_64-linux-gnu/libopencv_stitching.so -lopencv_stitching 
+/usr/lib/x86_64-linux-gnu/libopencv_superres.so -lopencv_superres 
+/usr/lib/x86_64-linux-gnu/libopencv_ts.so -lopencv_ts 
+/usr/lib/x86_64-linux-gnu/libopencv_video.so -lopencv_video 
+/usr/lib/x86_64-linux-gnu/libopencv_videostab.so -lopencv_videostab
+
+pkg-config --cflags opencv
+-I/usr/include/opencv
+
+
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

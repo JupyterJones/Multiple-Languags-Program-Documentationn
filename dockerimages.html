@@ -1,0 +1,23 @@
+
+<html>
+<head>
+<title>FFmpeg Information and Commands</title>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<body>
+
+<h1>JavaBuilder-Docker</h1>
+
+<p <span class = "notice"> jacknorthrup/oracle8 contains Oracle Java8</span><br />
+This docker image compiles and executes java . The container works just like an installed Java. However it does not effect your native install. 
+The git repository shows how to use a Compile and Run command, to create an run java8 apps. </p>
+<pre>
+https://github.com/JupyterJones/JavaBuilder-Docker
+https://hub.docker.com/r/jacknorthrup/oracle8/
+
+docker pull jacknorthrup/oracle8
+
+Compile: docker run --rm -v $PWD:/app -w /app jacknorthrup/oracle8:latest javac
+Execute: docker run --rm -v $PWD:/app -w /app jacknorthrup/oracle8:latest java
+-------------------------------------------------
+</pre>

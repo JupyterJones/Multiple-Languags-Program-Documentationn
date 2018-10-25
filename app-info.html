@@ -1,0 +1,143 @@
+<html>
+<head>
+<title>Docker Images</title>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<style>
+html{
+  background-color: white;
+}
+body{
+  padding:30px;
+  border: 1px solid black;
+  background-color: #f2f2f2;
+}
+pre{
+  text-align: left;
+  font-size:15px;
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+      white-space: -pre-wrap;      /* Opera 4-6 */
+      white-space: -o-pre-wrap;    /* Opera 7 */
+      word-wrap: break-word;       /* Internet Explorer 5.5+ */
+
+}
+h1{
+  margin: 0 auto;
+  text-align: center;
+  color: gray;
+  padding-right:10%;
+  padding-left:10%;
+  width:80%;
+  background-color: lightyellow;
+  border: 1px solid gray;
+}
+h2{
+  text-align: center;
+  color: red;
+}
+
+p{
+  text-align: left;
+  color: navy;
+}
+.notice{
+font-size:1.2em;
+}
+.see-red{
+font-size:1.2em;
+color:red;
+}
+#index{
+  margin: 0 auto;
+  padding-right:10%;
+  padding-left:10%;
+  padding-top:20px;
+  padding-bottom:20px;
+  border: 1px solid gray;
+  width:80%;
+  text-align: center
+}
+.sect{
+  margin: 20px auto;
+  width:95%;
+  height: auto;
+  background-color: lightgray;
+  border: 5px solid black;
+  padding: 20px; 
+}
+
+.bad{
+  margin: 20px auto;
+  width:95%;
+  height: auto;
+  background-color: pink;
+  border: 5px solid black;
+  padding: 20px; 
+}
+.blk{
+  margin: 20px auto;
+  width:95%;
+  height: auto;
+  border: 2px solid black;
+  padding: 20px; 
+}
+</style>
+</head>
+<body>
+<a class = "see-red" href="index.html">HOME</a>	
+<h1>my-python-app:latest</h1>
+<pre>
+docker run --name python-app -p 5000:5000 my-python-app:latest
+</pre>
+<p>
+Imagine you’re trying to deploy the following Python code, contained in index.py. The application is a simple, “Hello World” app that uses Flask, a small HTTP server for Python apps.
+</p>
+<pre>
+------------ index.py ---------------
+
+from flask import Flask
+app = Flask(__name__)
+@app.route("/")
+def hello():
+    return "Hello World!"
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int("5000"), debug=True)
+</pre>
+<p>
+To do so, create a text file called Dockerfile in your application’s root and paste in the following code.
+</p>
+<pre>
+----------- Dockerfile ------------- 
+
+FROM python:alpine3.7
+COPY . /app
+WORKDIR /app
+RUN pip install -r requirements.txt
+EXPOSE 5000
+CMD python ./index.py
+</pre>
+<p>
+Note that FROM directive is pointing to python:alpine3.7. This is telling Docker what base image to use for the container, and implicitly selecting the Python version to use, which in this case is 3.7. Docker Hub has base images for almost all supported versions of Python including 2.7. This example is using Python installed on Alpine Linux, a minimalist Linux distro, which helps keep the images for Docker small. Prefer Alpine unless there’s a compelling reason to use another base image such as Debian Jessie.<br />
+</p>
+<p>
+Also note is the RUN directive that is calling PyPi (pip) and pointing to the requirements.txt file. This file contains a list of the dependencies that the application needs to run. Because Flask is a dependency, it is included as such in the requirements.txt with a simple reference. You can also select version libraries if you need specific versions with requirements.txt. The file should also be in the root of the application.<br />
+</p>
+<pre>
+--------------- requirements.txt --------------- 
+
+flask
+</pre>
+<p>
+The remaining directives in the Dockerfile are pretty straightforward. The CMD directive tells the container what to execute to start the application. In this case, it is telling Python to run index.py. The COPY directive simply moves the application into the container image, WORKDIR sets the working directory, EXPOSE exposes a port that is used by Flask.<br />
+
+To build the image, run Docker build from a command line or terminal that is in the root directory of the application.
+</p>
+<pre>
+docker build --tag my-python-app .<br />
+</pre>
+<p>
+This will “tag” the image my-python-app and build it. After it is built, you can run the image as a container.<br />
+docker run --name python-app -p 5000:5000 my-python-app<br />
+
+This starts the application as a container. The –name parameter names the container and the -p parameter maps the host’s port 5000 to the containers port of 5000. Lastly, the my-python-app refers to the image to run. After it starts, you should be able to browse to the container. Depending on how you are running Docker depends on what the IP address of the application will be. Docker for Windows and Docker for Mac will be able to use 127.0.0.1. For other instances, it will be the host IP of a VM or physical machine you are running Docker on.
+</p>

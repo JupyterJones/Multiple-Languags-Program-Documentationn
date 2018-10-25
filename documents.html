@@ -1,0 +1,126 @@
+<pre>
+#!/bin/bash
+#  Bash Menu Script Example
+
+PS3='Please enter your choice: '
+options=("HOME" "FFMPEG" "editFFMPEG" "DOCKER" "editDOCKER" "ANACONDA" "editANACONDA" "DEEPDREAM" "editDEEPDREAM" "NED" "editNED"\
+ "BASH" "editBASH" "Jupyter-keys" "editJupyter-keys" "editThisMenu" "viewThisMenu" "editviewThisMenu" "viewCurrentDockerImages"\
+ "editCurrentDockerImages" "Docs-on-torchjupzbaevnc" "edit-torchjupzbaevnc" "dockerimage" "edit-dockerimage" "key-pem-csr-info"\
+ "edit-key-pem-csr-info" "Jupyter-notebook" "edit-Jupyter-notebook" "C++" "edit-C++" "Dockerfiles" "edit-Dockerfiles"\
+ "vps-docker-vcn" "edit-vps-docker-vcn" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "HOME")
+            firefox ~/Desktop/NXGIN/index.html
+            ;;        
+        "FFMPEG")
+            firefox ~/Desktop/NXGIN/FFMPEG.html
+            ;;
+        "editFFMPEG")
+            sub ~/Desktop/NXGIN/FFMPEG.html
+            ;;            
+        "DOCKER")
+            firefox ~/Desktop/NXGIN/DOCKER.html
+            ;;
+        "editDOCKER")
+            sub ~/Desktop/NXGIN/DOCKER.html
+            ;;            
+        "ANACONDA")
+            firefox ~/Desktop/NXGIN/AnacondaPython.html
+            ;;
+        "editANACONDA")
+            sub ~/Desktop/NXGIN/AnacondaPython.html
+            ;;            
+        "DEEPDREAM")
+            firefox ~/Desktop/NXGIN/DeepDreamStuff.html
+            ;;
+        "editDEEPDREAM")
+            firefox ~/Desktop/NXGIN/DeepDreamStuff.html
+            ;;
+        "NED")
+            firefox ~/Desktop/NXGIN/NED.html
+            ;;
+        "editNED")
+            sub ~/Desktop/NXGIN/NED.html
+            ;;            
+        "BASH")
+            firefox ~/Desktop/NXGIN/Bash.html
+            ;;
+        "editBASH")
+            sub ~/Desktop/NXGIN/Bash.html
+            ;;
+        "Jupyter-keys")
+            firefox ~/Desktop/NXGIN/key-pem-csr-info.html
+            ;;
+        "editJupyter-keys")
+            sub ~/Desktop/NXGIN/key-pem-csr-info.html
+            ;;
+        "viewThisMenu")
+            firefox ~/Desktop/NXGIN/documents.html
+            ;;
+        "editviewThisMenu")
+            sub ~/Desktop/NXGIN/documents.html
+            ;;
+        "viewCurrentDockerImages")
+            firefox ~/Desktop/NXGIN/dockerimages.html
+            ;;
+        "editCurrentDockerImages")
+            sub ~/Desktop/NXGIN/dockerimages.html
+            ;;            
+        "editThisMenu")
+            sub /usr/local/bin/documents
+            ;;
+         "Docs-on-torchjupzbaevnc")
+            firefox ~/Desktop/NXGIN/jacknorthrup-torchjupzbaevnc_BUILD_START.html
+            ;;
+         "edit-torchjupzbaevnc")
+            sub ~/Desktop/NXGIN/jacknorthrup-torchjupzbaevnc_BUILD_START.html
+            ;;
+         "dockerimage")
+            firefox ~/Desktop/NXGIN/images.html
+            ;;
+         "edit-dockerimage")
+            sub ~/Desktop/NXGIN/images.html
+            ;;
+         "key-pem-csr-info")
+            firefox ~/Desktop/NXGIN/key-pem-csr-info.html
+            ;;
+         "edit-key-pem-csr-info")
+            sub ~/Desktop/NXGIN/key-pem-csr-info.html
+            ;;
+         "Jupyter-notebook")
+            firefox ~/Desktop/NXGIN/jupyter-notebook.html
+            ;;
+         "edit-Jupyter-notebook")
+            sub ~/Desktop/NXGIN/jupyter-notebook.html
+            ;;
+         "C++")
+            firefox ~/Desktop/NXGIN/c++.html
+            ;;
+         "edit-C++")
+            sub ~/Desktop/NXGIN/c++.html
+            ;;
+         "Dockerfiles")
+            firefox ~/Desktop/NXGIN/Dockerfiles.html
+            ;;
+         "edit-Dockerfiles")
+            sub ~/Desktop/NXGIN/Dockerfiles.html
+            ;; 
+         "vps-docker-vcn")
+            firefox ~/Desktop/NXGIN/creating-connecting-to-vps-docker-vcn.html
+            ;;
+         "edit-vps-docker-vcn")
+            sub ~/Desktop/NXGIN/creating-connecting-to-vps-docker-vcn.html
+            ;;
+
+        "Quit")
+            break
+            ;;
+        *) echo invalid option;;
+    esac
+done
+# key-pem-csr-info.html
+#pip install jupyter_nbextensions_configurator
+#jupyter nbextensions_configurator enable         
+</pre>

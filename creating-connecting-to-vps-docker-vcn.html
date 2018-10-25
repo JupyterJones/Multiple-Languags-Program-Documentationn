@@ -1,0 +1,31 @@
+<html>
+<pre>
+There are two issues in the question that prevent you from the goal you want to achieve:
+
+1. X server is missed in the image.
+
+2. VNC server should be started in a container.
+
+The additional part of Dockerfile is:
+
+RUN apt-get install -y x11vnc xvfb 
+RUN mkdir ~/.vnc
+RUN x11vnc -storepasswd 1234 ~/.vnc/passwd
+COPY entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
+where entrypoint.sh is:
+
+#!/bin/bash
+x11vnc -forever -usepw -create &
+/bin/bash
+
+Now we can start a container using the following command:
+
+docker run --rm -ti -p 5900:5900 < image_name_or_id >
+
+and access it via vncviewer from the same host where container is started:
+
+vncviewer localhost:5900
+
+</pre>

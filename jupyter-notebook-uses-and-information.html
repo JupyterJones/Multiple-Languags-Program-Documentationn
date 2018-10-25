@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>jupyter-notebook-uses-and-information</title>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<body>
+<h1>Jupyter Notebook</h1>
+<a class = "notice" href= "index.html">HOME</a>
+<p>
+Short cuts, info, extensions and cool online notebooks.
+</p>
+<div id = "index">
+	<ul style="text-align:left;">
+	<li><a href="#MOVING">Moving Images to Another Partition</a></li>
+    <li><a href="#pulling">Pull a Docker Container</a></li>
+    <li><a href="#enter">Enter a Docker Container</a></li>
+    <li><a href="#open">Open and keep open a Docker Container</a></li>
+    <li><a href="#anaconda">Installing Anaconda in a Container</a></li>
+    <li><a href="#problem">Problem starting Docker </a></li>
+    <li><a href="#server">Start a Server</a></li>
+    <li><a href="#dangling">List and Delete Dangling Images</a></li>
+    <li><a href="#inspect">Open an Image With prompt</a></li>
+    <li><a href="#mathjax">Installing MathJax in A Container</a></li>
+    <li><a href="#remove">Remove All Exited Containers</a></li>
+    <li><a href="#portain">Portainer info</a></li>
+    <li><a href="#stopandremove">Stop and Remove All Containers</a></li>
+    <li><a href="#copy">Copy to and From Containers</a></li>
+   </ul>
+
+</div>
+<div>
+
+<h1>Sept 29, 2018 Docker Images and Commands</h1>
+<h1>current jupyter config for jacknorthrup/darkroom:latest</h1>
+<pre>
+current jupyter config for jacknorthrup/darkroom:latest
+
+## Answer yes to any prompts.
+c.JupyterApp.answer_yes = True
+## Whether to allow the user to run the notebook as root.
+c.NotebookApp.allow_root = True
+c.NotebookApp.base_url = '/notebooks'
+#  When disabled, equations etc. will appear as their untransformed TeX source.
+c.NotebookApp.enable_mathjax = True
+## The IP address the notebook server will listen on.
+c.NotebookApp.ip = '0.0.0.0'
+#  MathJax, for example:  /static/components/MathJax/MathJax.js
+c.NotebookApp.mathjax_url = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js'
+#  configuration option.
+c.NotebookApp.open_browser = False
+#  The string should be of the form type:salt:hashed-password.
+c.NotebookApp.password = 'sha1:94db51001cd2:184e8f9b12422282dd22023485a1a413379beef9'
+## Forces users to use a password for the Notebook server. This is useful in a
+#  any user can connect to the notebook server via ssh.
+c.NotebookApp.password_required = False
+## The port the notebook server will listen on.
+c.NotebookApp.port = 8888
+</pre>
+
+<h1>https://imagelayers.io/?images=welkineins/ubuntu-xfce-vnc-desktop:latest</h1>
+<pre>
+ADD file:f4d7b4b3402b5c53f266bb7fdd7e728493d9a17f9ef20c8cb1b4759b6e66b70f in /
+RUN echo '#!/bin/sh' > /usr/sbin/policy-rc.d && echo 'exit 101' >> /usr/sbin/policy-rc.d && chmod +x /usr/sbin/policy-rc.d && dpkg-divert --local --rename --add /sbin/initctl && cp -a /usr/sbin/policy-rc.d /sbin/initctl && sed -i 's/^exit.*/exit 0/' /sbin/initctl && echo 'force-unsafe-io' > /etc/dpkg/dpkg.cfg.d/docker-apt-speedup && echo 'DPkg::Post-Invoke { "rm -f /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin || true"; };' > /etc/apt/apt.conf.d/docker-clean && echo 'APT::Update::Post-Invoke { "rm -f /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin || true"; };' >> /etc/apt/apt.conf.d/docker-clean && echo 'Dir::Cache::pkgcache ""; Dir::Cache::srcpkgcache "";' >> /etc/apt/apt.conf.d/docker-clean && echo 'Acquire::Languages "none";' > /etc/apt/apt.conf.d/docker-no-languages && echo 'Acquire::GzipIndexes "true"; Acquire::CompressionTypes::Order:: "gz";' > /etc/apt/apt.conf.d/docker-gzip-indexes
+RUN sed -i 's/^#\s*\(deb.*universe\$/\1/g' /etc/apt/sources.list
+CMD "/bin/bash"
+MAINTAINER Chieh Yu &lt;welkineins@gmail.com&gt;
+ENV HOME=/root
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y supervisor openssh-server vim-tiny xfce4 xfce4-goodies x11vnc xvfb firefox && apt-get autoclean && apt-get autoremove && rm -rf /var/lib/apt/lists/*
+WORKDIR /root
+ADD file:1ea648d644af6d3065a6887e215d8e6b67d98b58ed0a5c2b2a990bc28c5c2eca in ./
+ADD file:68b54563691644b0dfff513318e98cfca87a4384907fd4a0631d844cd1ce87bc in ./
+EXPOSE 5900/tcp
+EXPOSE 22/tcp
+ENTRYPOINT ./startup.sh
+</pre>
+
+</body>
+</html>

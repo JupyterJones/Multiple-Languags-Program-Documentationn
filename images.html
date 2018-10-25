@@ -1,0 +1,412 @@
+<html>
+<head>
+<title>Docker Images</title>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<style>
+html{
+  background-color: white;
+}
+body{
+  padding:30px;
+  border: 1px solid black;
+  background-color: #f2f2f2;
+}
+pre{
+  text-align: left;
+  font-size:15px;
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+      white-space: -pre-wrap;      /* Opera 4-6 */
+      white-space: -o-pre-wrap;    /* Opera 7 */
+      word-wrap: break-word;       /* Internet Explorer 5.5+ */
+
+}
+h1{
+  margin: 0 auto;
+  text-align: center;
+  color: gray;
+  padding-right:10%;
+  padding-left:10%;
+  width:80%;
+  background-color: lightyellow;
+  border: 1px solid gray;
+}
+h2{
+  text-align: center;
+  color: red;
+}
+
+p{
+  text-align: left;
+  color: navy;
+}
+.notice{
+font-size:1.2em;
+
+
+}
+#index{
+  margin: 0 auto;
+  padding-right:10%;
+  padding-left:10%;
+  padding-top:20px;
+  padding-bottom:20px;
+  border: 1px solid gray;
+  width:80%;
+  text-align: center
+}
+.sect{
+  margin: 20px auto;
+  width:95%;
+  height: auto;
+  background-color: lightgray;
+  border: 5px solid black;
+  padding: 20px; 
+}
+
+.bad{
+  margin: 20px auto;
+  width:95%;
+  height: auto;
+  background-color: pink;
+  border: 5px solid black;
+  padding: 20px; 
+}
+.blk{
+  margin: 20px auto;
+  width:95%;
+  height: auto;
+  border: 2px solid black;
+  padding: 20px; 
+}
+</style>
+</head>
+<body>
+ 
+<pre>
+REPOSITORY                                             TAG                    IMAGE ID            CREATED             SIZE
+
+<h1>jacknorthrup-data/science:latest 4227dd607404 6.48GB</h1>
+<span class ="notice"> docker run -d -p 8888:8888 -v $(pwd)/notebooks:/notebooks jacknorthrup-data/science:latest</>span>
+<p>
+Python3 - R - Julia 1.0 Notebooks with lots of modules
+</p>
+<pre>
+conda4.5.8                 Cython0.28.5           h5py2.7.1           html5lib1.0.1
+ipykernel4.8.2             ipython6.5.0           jupyterlab0.34.0    jupyterlab-launcher0.13.1
+Keras-Applications1.0.6    Keras-Preprocess1.0.5  numba0.38.1         numpy1.13.3
+Pillow5.2.0 protobuf3.6.0  requests2.19.1         scikit-image0.14.0  scikit-learn0.19.2
+scipy1.1.0                 seaborn0.9.0           SQLAlchemy1.2.11    tensorboard1.11.0
+tensorflow1.11.0           urllib31.23            --and more
+</pre>
+
+<h1>jacknorthrup/oracle8:latest 89c16cbd20bb 680MB</h1>
+<p>
+<span class="notice">working good</span>
+Usage:<br />
+To run java -<br />
+<code>docker run -it --rm jacknorthrup/oracle8:latest java</code><br />
+
+To run javac -<br />
+<code>docker run -it --rm jacknorthrup/oracle8:latest javac</code><br />
+</p>
+<pre>
+docker run -it --rm jacknorthrup/oracle8:latest java -version
+java version "1.8.0_181"
+Java(TM) SE Runtime Environment (build 1.8.0_181-b13)
+Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)
+</pre>
+<h1>jacknorthrup/py2-torch:latest</h1>
+<span class="notice">docker run -it -p 8888:8888 -v $(pwd)/notebooks:/notebooks jacknorthrup/py2-torch:latest /bin/sh -c 'cd /notebooks; jupyter notebook --ip="0.0.0.0" --no-browser --allow-root'</span><br />  
+ password = password<br />
+<pre>
+1and1internet/ubuntu-16-nginx-php-phpmyadmin-mysql-5:latest   082e92bdee7f        3 days ago          708MB
+------ref https://docs.docker.com/storage/volumes/#next-steps --------------------------------------------------------------
+</pre>
+<div class="bad">
+<h1>IMAGE: nginx:latest bc26f1ed35cf</h1>
+<b style="font-size:24px;">BEST</b><br />
+<span class="notice">docker run --rm -d -p 8080:80 -v $(pwd)/NXGIN:/usr/share/nginx/html -d nginx</span>  
+docker volume create my-vol<br />
+docker volume inspect my-vol<br />
+docker volume rm my-vol<br />
+docker run -d --name devtest -v myvol:/app nginx:latest<br />
+docker inspect devtest<br />
+<pre>  
+nginx:latest                 bc26f1ed35cf        7 days ago          109MB
+docker run -d --name devtest --mount source=myvol,target=/app nginx:latest
+
+docker run -d --name=nginxtest --mount source=nginx-vol,destination=/usr/share/nginx/html nginx:latest
+ </pre>
+ </div>
+ <pre>   
+----------------------------------------------------------------------------------------------------------------------------  
+alpine                                                 3.4                    174b26fe09c7        3 weeks ago         4.82MB
+----------------------------------------------------------------------------------------------------------------------------
+</pre>
+<div class="sect">
+<h1>gcc:latest</h1>
+<a href= "https://www.programiz.com/cpp-programming/examples">programiz.com/cpp-programming/examples</a>
+<p>
+gcc                                                    latest                 1d6ec261d687        3 weeks ago         1.68GB
+Start a GCC instance running your app<br />
+The most straightforward way to use this image is to use a gcc container as both the build and runtime environment. In your Dockerfile, writing something along the lines of the following will compile and run your project:<br />
+</p>
+<pre>
+FROM gcc:4.9
+COPY . /usr/src/myapp
+WORKDIR /usr/src/myapp
+RUN gcc -o myapp main.c
+CMD ["./myapp"]
+Then, build and run the Docker image:
+
+$ docker build -t my-gcc-app .
+$ docker run -it --rm --name my-running-app my-gcc-app
+</pre>
+<p>
+Compile your app inside the Docker container<br />
+There may be occasions where it is not appropriate to run your app inside a container. To compile, but not run your app inside the Docker instance, you can write something like:<br />
+</p>
+<pre>
+$ docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp gcc:4.9 gcc -o myapp
+-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - 
+This will add your current directory, as a volume, to the container, set the working directory to the volume, and run the command gcc -o myapp myapp.c. This tells gcc to compile the code in myapp.c and output the executable to myapp. Alternatively, if you have a Makefile, you can instead run the make command inside your container:
+
+$ docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp gcc:4.9 make
+License
+
+</pre>
+</div>
+<h1>To Generically Open a Docker Image and a Port</h1>
+<span style = "font-size:23px;color:navy;">docker run -it -p 8888:8200 ubuntu:16.04</span><br />
+<p>This works quite well to open and hold open for inspection any docker image.</p>
+<pre>
+----------------------------------------------------------------------------------------------------------------------------
+ubuntu:16.04                  b9e15a5d1e1a        3 weeks ago         115MB
+ubuntu:14.04                  c32fae490809        3 weeks ago         188MB
+ubuntu:18.04                  cd6d8154f1e1        3 weeks ago         84.1MB
+debian:stretch-slim           44e19a16bde1        4 weeks ago         55.3MB
+
+<span class="notice">docker run -it -p 8888:8200 ubuntu:16.04</span>
+
+</pre>
+<div class="sect">
+<h1>jupyter/datascience-notebook</h1>
+<p>
+This image contains Jupyte Lab with Python , R and NodeJS.   
+</p>
+<pre>-------------- Works Great -------------------------------------------------------------------------------------------------
+jupyter/datascience-notebook                           latest                 a0da0a3dbd5c        4 weeks ago         6.07GB
+docker run --rm -p 10000:8888 -e JUPYTER_ENABLE_LAB=yes -v "$PWD"/notebooks:/home/jovyan/work jupyter/datascience-notebook:latest
+http://172.17.0.2:8888/lab
+---------------------------------------------------------------------------------------------------------------------------------
+</div>
+
+<pre>
+busybox:latest                e1ddd7948a1c        2 months ago        1.16MB
+eclipse/ubuntu_jdk8:latest    d1f9b3b8934e        2 months ago        749MB
+node:10.5.0-alpine            c81046dc8599        3 months ago        69.9MB
+---------------------------------------------------------------------------------------------------------------------------------
+</pre>
+<div class="sect">
+
+When the provided 'run' is used either a /root directory is created from what ever location it is run. if the directory exists,<br />
+it will be used. Example:<br />
+If started on the Desktop a Desktop/root directory will be created. Any files in that directory will be made available to the<br />
+jupyter notebook. If Desktop/root alread exists, it will be used. <br />
+ufoym/deepo:all-py27-jupyter-cpu   56386798ce35        5 months ago        3.62GB<br />
+docker run -it -p 8888:8888 -v $(pwd)/root:/root ufoym/deepo:all-py27-jupyter-cpu jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/root'<br />
+On my computer a symlink was created - I just type startpy2 and the notebook starts. if started in the directory above a /root<br />
+directory the /root will be the working directory.<br />
+-----------------------------------------------------------------------------------------------------------------------------<br />
+-------------Works Great ----------------------------------------------------------------------------------------------------<br />
+When the provided 'run' is used either a /root directory is created from what ever location it is run. if the directory exists,<br />
+it will be used. Example:<br />
+If started on the Desktop a Desktop/root directory will be created. Any files in that directory will be made available to the<br />
+jupyter notebook. If Desktop/root alread exists, it will be used. <br />
+ufoym/deepo:all-py36-jupyter-cpu   d44eeec13da8        5 months ago        3.59GB<br />
+docker run -it -p 8888:8888 -v $(pwd)/root:/root ufoym/deepo:all-py36-jupyter-cpu jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token= --notebook-dir='/root'<br />
+On my computer a symlink was created - I just type startpy3 and the notebook starts. if started in the directory above a /root<br />
+directory the /root will be the working directory.<br />
+-----------------------------------------------------------------------------------------------------------------------------
+</div>
+<pre>
+takp/torch-opencv:latest           76a689514434        5 months ago        4.61GB
+kaixhin/torch:latest               bb6780c39bc1        7 months ago        1.14GB
+</pre>
+<div class="sect">
+ <h1>ipython/notebook Python 2 and python3</h1> 
+<pre>  
+------------------  tested and working ----------------------------------------------------------------
+ipython/notebook                                       latest                 c61890b6055e        16 months ago       817MB
+docker run -d -p 443:8888 -e "PASSWORD=MakeAPassword" ipython/notebook
+------------------------------------------------------
+</pre>
+</div>
+
+jacknorthrup/darkroom:latest         e95a39c80fa3        16 months ago       3.07GB
+heroku/nodejs:latest                 ab528f5609c3        17 months ago       1.38GB
+jurjean/visual-studio-code:latest    7bcde672e2da        20 months ago       808MB
+</pre>
+<div class="sect">
+<h1>jurjean/visual-studio-code:latest</h1>
+<pre><font color="#06989A">#!/bin/bash</font>
+xhost +<font color="#4E9A06">local:</font>docker
+docker run -it --user <font color="#4E9A06">$(</font>id <font color="#4E9A06">-u)</font> <font color="#4E9A06">-e</font> DISPLAY<font color="#4E9A06">=</font><font color="#EF2929"><b>$DISPLAY</b></font> -v /tmp/.X11-unix<font color="#4E9A06">:</font>/tmp/.X11-unix --privileged jurjean/visual-studio-code<font color="#4E9A06">:</font>latest
+
+#!/bin/bash
+xhost +local:docker
+docker run -it --user $(id -u) -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --privileged jurjean/visual-studio-code:latest
+
+</pre>
+</div>
+<pre>
+eboraas/openai-gym:latest                   078191c3c9d0        2 years ago         1.47GB
+crisbal/torch-rnn:base                      90e6f8c8be88        2 years ago         1.17GB
+mbartoli/char-rnn:latest                    5b156e888a96        2 years ago         1.36GB
+centurylink/dockerfile-from-image:latest    970eaf375dfd        2 years ago         19.2MB
+</pre>
+<div class="blk">
+<h1>Tiny Ububtu 16.04 ----------<i>special made for docker</i></h1>
+<pre>
+------------------------ tiny Ububtu 16.04 ---------- special made for docker -------------------------------------------------
+phusion/baseimage:0.9.17                    035cda81a0b6        3 years ago         238MB
+docker run --rm -t -i phusion/baseimage:0.9.17 /sbin/my_init -- bash -l
+</pre>
+</div>
+<br /><br />
+<div class="sect">
+<h1>ryankennedyio/deepdream</h1>
+<span style = "font-size:21px;color:navy;">docker run -d -p 443:8888 -e "PASSWORD=password" -v /deep-dream-generator:/src ryankennedyio/deepdream</span><br />
+<pre>
+--------------  works  --------------------------------------------------------------------------------------------------------
+ryankennedyio/deepdream:latest              0a9c65d5d2bb        3 years ago         2.88GB
+docker run -d -p 443:8888 -e "PASSWORD=password" -v /deep-dream-generator:/src ryankennedyio/deepdream
+-------------------------------------------------------------------------------------------------------------------------------
+</pre>
+</div>
+<pre>
+-------------------------------------------------------------------------------------------------------------------------------  
+</pre>
+<div class="sect">
+<h1>welkineins/ubuntu-xfce-vnc-desktop</h1>
+<pre>
+welkineins/ubuntu-xfce-vnc-desktop:latest   528b0c66a2a1        3 years ago         749MB
+docker run -i -t -p 5900:5900 welkineins/ubuntu-xfce-vnc-desktop
+Use vnc viewer to :5900
+</pre>
+<a href= "https://github.com/welkineins/docker-ubuntu-xfce-vnc-desktop">Welkineins Docker-ubuntu-xfce-vnc-desktop</a>
+
+</div>
+<pre>
+-------------------------------------------------------------------------------------------------------------------------------  
+</pre>
+<div class="sect">
+ <h1>nikhilk/ijs:latest</h1> 
+<pre>
+
+
+---------------------------------------------------------------------------------------------------------------------------
+nikhilk/ijs:latest                 46df1994538a        3 years ago         560MB
+docker run -i -p 9999:9999 -v < path to working directory >:/data -t nikhilk/ijs:latest
+</pre>
+</div>
+<pre>
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+</pre>
+<div class="sect">
+<h1>fgrehm/eclipse:v4.4.1</h1>
+<a href= "https://https://github.com/interactivecomputing/ijs">github.com/interactivecomputing/ijs</a>
+<pre>
+-------------------------------------------------------------------------------------------------------------------------------
+fgrehm/eclipse:v4.4.1                 f5a7bc9a7ac4        3 years ago         979MB
+run from a symlink - just type eclipse 
+working directory is ~Desktop/eclipse-docker
+Script:
+#!/bin/bash
+# Below is the first run. Then comment out.
+# docker pull fgrehm/eclipse:v4.4.1
+docker run -ti --rm -e DISPLAY=:0.0 -v /tmp/.X11-unix:/tmp/.X11-unix -v /home/jack/Desktop/eclipse-docker:/home/developer -v /home/jack/Desktop/workspace:/workspace fgrehm/eclipse:v4.4.1
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+docker run -ti --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v $(pwd)/eclipse-docker:/home/developer -v $(pwd)/workspace:/workspace jriobello/eclipse:0.1 eclipse
+</pre>
+</div>
+<pre>
+docker service create \
+    --mount 'type=volume,src=/root,dst=/root,volume-driver=local,volume-opt=type=nfs,volume-opt=device=< nfs-server>:< nfs-path>,"volume-opt=o=addr=< nfs-address>,vers=4,soft,timeo=180,bg,tcp,rw"'
+    --name myservice \
+    ufoym/deepo:all-py36-jupyter-cpu
+
+docker service create \
+    --mount 'type=volume,src=< VOLUME-NAME>,dst=< CONTAINER-PATH>,volume-driver=local,volume-opt=type=nfs,volume-opt=device=< nfs-server>:< nfs-path>,"volume-opt=o=addr=< nfs-address>,vers=4,soft,timeo=180,bg,tcp,rw"'
+    --name myservice \
+    < IMAGE>
+
+</pre>
+</span>
+
+docker run -d -p 443:8888 -e "PASSWORD=password" -v /deep-dream-generator:/src -v /home/jack/Desktop/Ubuntu16.04/notebooks/:/notebooks 
+
+
+
+
+<pre fontsize="1.5em">
+#!/bin/bash
+
+Think Good !
+docker run --name image-processing -d -p 443:8888 -e "PASSWORD=password" -v $(pwd)/notebooks:/notebooks
+
+#!/bin/bash
+#docker run --name notebook-experim -d -p 443:8888 -e "PASSWORD=password" -v $(pwd)/notebooks:/notebooks
+
+docker run -v /home/jack/:/key.pem -v $(pwd)/notebooks:/notebooks -d -p 443:8888 -e "PASSWORD=pass" jacknorthrup/darkroom:latest jupyter notebook
+
+#!/bin/bash
+
+Think Good !
+docker run --name image-processing -d -p 443:8888 -e "PASSWORD=password" -v $(pwd)/notebooks:/notebooks
+
+#!/bin/bash
+#docker run --name notebook-experim -d -p 443:8888 -e "PASSWORD=password" -v /h$
+
+docker run -v /home/jack/key.pem:/key.pem -v $(pwd)/notebooks:/notebooks -d -p 443:8888 -e "PASSWORD=pass" jacknorthrup/darkroom:latest
+
+mkdir -p .eclipse-docker docker run -ti --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v `pwd`/.eclipse-docker:/home/developer -v `pwd`:/workspace fgrehm/eclipse:v4.4.1
+
+mkdir -p .eclipse-docker docker run -ti --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v $(pwd)/.eclipse-docker:/home/developer -v $(pwd):/workspace eclipse/ubuntu_jdk8
+
+docker run -ti --name test -v $(pws)/Dockerfiles:/home eclipse/ubuntu_jdk8
+
+docker run -ti --rm -e DISPLAY=$DISPLAY  -v /tmp/.X11-unix:/tmp/.X11-unix -v $(pwd)/.eclipse-docker:/home/developer -v $(pw):/workspace 
+
+
+
+
+</pre>
+<h1>WEB CAM</h1>
+<pre>
+ ./start
+Unable to find image 'woahbase/alpine-pulseaudio:x86_64' locally
+x86_64: Pulling from woahbase/alpine-pulseaudio
+c76b39ada3ed: Pull complete 
+aeced42c06f0: Pull complete 
+097429bed37c: Pull complete 
+b0efe2564e38: Pull complete 
+a4102a685f9a: Pull complete 
+Digest: sha256:f2749243d459e0c577e2046587c53a97d08592755551dba76395457215639bbd
+Status: Downloaded newer image for woahbase/alpine-pulseaudio:x86_64
+docker: Error response from daemon: create config/pulse: "config/pulse" includes invalid characters for a local volume name, only "[a-zA-Z0-9][a-zA-Z0-9_.-]" are allowed. If you intended to pass a host directory, use absolute path.
+See 'docker run --help'.
+  
+</pre>
+-------------------------------------------------------------------------------------------------------------------------------
+<h1>dash00/tensorflow-python3-jupyter</h1>
+<a href = "https://hub.docker.com/r/dash00/tensorflow-python3-jupyter/"> hub.docker.com dash00/tensorflow-python3-jupyter</a>
+<pre>
+docker run -it -p 8888:8888 dash00/tensorflow-python3-jupyter
+-------------------------------------------------------------------------------------------------------------------------------
+</pre>

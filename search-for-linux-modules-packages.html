@@ -1,0 +1,208 @@
+<html>
+<head>
+<title>Docker Images</title>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<style>
+html{
+  background-color: white;
+}
+body{
+  padding:30px;
+  border: 1px solid black;
+  background-color: #f2f2f2;
+}
+pre{
+  text-align: left;
+  font-size:15px;
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+      white-space: -pre-wrap;      /* Opera 4-6 */
+      white-space: -o-pre-wrap;    /* Opera 7 */
+      word-wrap: break-word;       /* Internet Explorer 5.5+ */
+
+}
+h1{
+  margin: 0 auto;
+  text-align: center;
+  color: gray;
+  padding-right:10%;
+  padding-left:10%;
+  width:80%;
+  background-color: lightyellow;
+  border: 1px solid gray;
+}
+h2{
+  text-align: center;
+  color: red;
+}
+
+p{
+  text-align: left;
+  color: navy;
+}
+.notice{
+font-size:1.2em;
+
+
+}
+#index{
+  margin: 0 auto;
+  padding-right:10%;
+  padding-left:10%;
+  padding-top:20px;
+  padding-bottom:20px;
+  border: 1px solid gray;
+  width:80%;
+  text-align: center
+}
+.sect{
+  margin: 20px auto;
+  width:95%;
+  height: auto;
+  background-color: lightgray;
+  border: 5px solid black;
+  padding: 20px; 
+}
+
+.bad{
+  margin: 20px auto;
+  width:95%;
+  height: auto;
+  background-color: pink;
+  border: 5px solid black;
+  padding: 20px; 
+}
+.blk{
+  margin: 20px auto;
+  width:95%;
+  height: auto;
+  border: 2px solid black;
+  padding: 20px; 
+}
+</style>
+</head>
+<body>
+
+<h1>Installing Using Bash Command apt-file</h1>
+
+<p>The <b>apt-file</b> is a Linux bash tool that can search for and list, individual files in the Linux packages used by APT. Unlike dpkg -L, apt-file will search all available packages in the Linux repositories, not just the files that have already been installed. <b>apt-file</b> maintains a local cache of package contents. That cache is used as the source of the search.
+</p>
+<br>
+<h2>Installing apt-file</h2>
+
+To install apt-file on your system, it can be installed with the command:
+<pre>
+sudo apt update && sudo apt install apt-file
+</pre>
+<p>After installation, you will receive a message about creating the apt-file cache:<p>
+<br />
+<code>
+"The system-wide cache is empty. You may want to run 'apt-file update'
+as root to update the cache. You can also run 'apt-file update' as
+normal user to use a cache in the user's home directory."
+</code>
+<p>
+You may also receive a notification window:
+
+Apt-file notification window
+
+To update your user cache, you can click Run this action now, and then Close.
+<code>
+Apt-file update
+</code>
+Or, in a terminal you can run:<br />
+<code>
+sudo apt-file update && apt-file update
+</code>
+To update both the system-wide cache and your user cache.<br />
+
+When the update is complete, you are ready to use apt-file.<br />
+Syntax:<br />
+
+apt-file [options] [action] [pattern]<br />
+
+apt-file -f [options] search [file...]<br />
+
+apt-file -D [options] search [debian-package-name.deb...]<br />
+
+Actions:<br />
+<pre>
+find 	The same as search.
+list 	List all the files contained in packages whose names match pattern. One file per line is listed.
+purge 	Clear "Contents-" files from the apt-file cache directory. If you receive any errors listing or searching, it's a good idea to perform a purge and then an update.
+search 	Search for a file, whose name matches pattern, inside all available packages. Directory names are not searched, only file names.
+show 	The same as list.
+update 	Update apt-file's user cache of package contents from all configured APT sources.
+
+Options:
+-a arch,
+--architecture arch 	Different packages exist for different computer architectures. Use this option to specify which architecture's packages should be searched.
+-c cache-dir,
+--cache cache-dir 	Set the cache directory to cache-dir, instead of the default. If you run apt-file as a regular user, the default cache directory is $HOME/.cache/apt-file/. If you run apt-file as root, or if your user cache does not exist, the default cache directory is /var/cache/apt/apt-file/.
+-d mnt-point,
+--cdrom-mount mnt-point 	Use mnt-point as a CD-ROM mount point for reading package information.
+-D,
+--from-deb 	When this option is specified with the search action, apt-file reads the contents of a specific Debian package file, debian-package-file.deb, as the search pattern. This can be useful if you need to compare the contents of a broken package. This option implies -F.
+-f,
+--from-file 	Read the search pattern from the given file or files, one per line. To read patterns from standard input, use a single dash ("-") as the file name.
+-F,
+--fixed-string 	Interpret all search pattern characters literally. Use this to match pattern exactly.
+-i,
+--ignore-case 	Treat uppercase and lowercase letters the same when matching the search pattern.
+-l,
+--package-only 	Only display the package names, and omit file names.
+-N,
+--non-interactive 	If using one of the connection methods listed in the interactive value in the configuration file, skip all interactive prompts. This is useful when running apt-file in non-interactive modes such as a cron job.
+-s sources.list,
+--sources-list sources.list 	Use a custom list of APT sources. The default APT sources.list is typically located at /etc/apt/sources.list.
+-v,
+--verbose 	Display additional information when running.
+-x,
+--regexp 	Treat the pattern as a perl regular expression.
+-y,
+--dummy 	Run in "dummy" mode — simulate all actions. For instance, apt-file -y update will download nothing and create no cache files, but will still examine existing caches and return some output.
+-h,
+--help 	Display a brief help message, summarizing actions and options.
+-- 	The special option of two dashes ("--") indicates the end of options. This is necessary if your search pattern begins with a dash.
+apt-file examples
+
+apt-file purge
+
+Purge the user cache. An apt-file update will be needed before a search can be performed on the user cache. If the user cache doesn't exist, the system-wide cache can be used for user searches.
+
+apt-file update
+
+Download information from sources, and create or update the user cache.
+
+sudo apt-file purge
+
+Purge the system-wide cache. sudo apt-file update is required before the systemwide cache can be used.
+
+sudo apt-file update
+
+Download information from sources, and create or update the system-wide cache.
+
+apt-file search gimp
+
+Show every file that has "gimp" in its name, in every available APT package.
+
+apt-file --package-only search gimp
+
+Perform the same search as above, but list only the names of matching packages.
+
+apt-file list gimp
+
+List every file contained in every package that has "gimp" in its name.
+
+apt-file --package-only list gimp
+
+Perform the same search as above, but list only the matching package names. Running this command provides output similar to apt-cache --names-only search gimp.
+Relevant files and directories
+/etc/apt/apt-file.conf 	The default apt-file configuration file.
+/var/cache/apt/apt-file/ 	The system-wide apt-file cache.
+~/.cache/apt-file/ 	The user apt-file cache.
+/etc/apt/sources.list[.d] 	The default APT sources list.
+
+</pre>
+</body>
+</html>

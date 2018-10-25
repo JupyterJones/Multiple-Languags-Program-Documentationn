@@ -1,0 +1,36 @@
+
+
+
+
+
+<h2>Default value to a form</h2>
+<pre>
+&lt;?php
+    $default = get_option('your_name');
+    if( $default == "")
+    {
+        $default = &lt;your default value&gt;;
+    }
+?>
+&lt;input type="text" name="your_name" value="&lt;?php echo $default; ?&gt;" /&gt;
+&lt;/whatever&gt;
+</pre>
+
+http://www.theasciicode.com.ar/ascii-printable-characters/greater-than-sign-inequality-ascii-code-62.html
+
+<?php    
+if(isset($_POST['SubmitButton'])){ //check if form was submitted
+  $input = $_POST['inputText']; //get input text
+  $message = "Success! You entered: ".$input;
+}    
+?>
+
+<html>
+<body>    
+<form action="" method="post">
+<?php echo $message; ?>
+  <input type="text" name="inputText"/>
+  <input type="submit" name="SubmitButton"/>
+</form>    
+</body>
+</html>

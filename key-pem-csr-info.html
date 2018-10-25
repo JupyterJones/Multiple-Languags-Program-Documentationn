@@ -1,0 +1,394 @@
+<html>
+<head>
+<title>Jupyter in Docker Keys Info</title>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<body>
+
+<h1>Generating RSA private key, 2048 bit long modulus</h1>
+<pre>
+
+
+jack@jack-desktop:~$ openssl genrsa -out key.pem
+Generating RSA private key, 2048 bit long modulus
+.........+++
+...........................+++
+e is 65537 (0x10001)
+jack@jack-desktop:~$ openssl req -new -key key.pem -out csr.pem
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:PH
+State or Province Name (full name) [Some-State]:Bulacan
+Locality Name (eg, city) []:Gaya Gaya
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:BlogBlocksOrg
+Organizational Unit Name (eg, section) []:Nodejs
+Common Name (e.g. server FQDN or YOUR name) []:Jack Northrup
+Email Address []:jack@yahoo.com
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:ThinkPadT$#
+An optional company name []:BlogBlocksOrg
+jack@jack-desktop:~$ openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem
+Signature ok
+subject=/C=PH/ST=Bulacan/L=Gaya Gaya/O=BlogBlocksOrg/OU=Nodejs/CN=Jack Northrup/emailAddress=jack@yahoo.com
+Getting Private key
+
+
+#!/bin/bash
+
+docker run --rm --name image-processing -v /home/jack/key.pem:/key.pem -d -p 443:8888 -e "PASSWORD=password" -v /home/jack/Desktop/Ubuntu16.04/notebooks:/notebooks jacknorthrup/darkroom:latest  tail -f /dev/null
+
+docker run --rm --name start-stuff -v /home/jack/Desktop/Ubuntu16.04/notebooks:/notebooks -d jacknorthrup/darkroom:latest /bin/bash -c "cd /notebooks && ./notebook2.sh"
+
+
+#!/bin/bash
+#
+# Start the docker container which will keep looking for images inside
+# the inputs/ directory and spew out results into outputs/
+
+
+docker run --name darkroom-stuff -d -p 8888:8888 -e "PASSWORD=password" -v /notebooks/STUFF:/notebooks/STUFF jacknorthrup/darkroom:latest
+#docker run --name=jacks-notebook --rm -d -p 8888:8888 -e "PASSWORD=MakeAPassword" :/notebooks -e "USE_HTTP=1" 74ca5b9a6129:co
+sleep 2
+docker run --name start-stuff -v `pwd`/notebooks/STUFF:/notebooks/STUFF -d jacknorthrup/darkroom:latest /bin/bash -c "cd /src && ./notebook.sh"
+
+
+
+if [ "`sudo docker ps | grep darkroom-stuff`" = "" ]; then
+    echo "Making volume"
+    sudo docker run -t -i --rm --name darkroom-inside -v `pwd`/notebooks/STUFF:/notebooks/STUFF jacknorthrup/darkroom:latest /bin/bash
+else
+    echo "Steaming volume from darkroom-stuff"
+    sudo docker run -t -i --name darkroom-inside --volumes-from=darkroom-stuff jacknorthrup/darkroom:latest /bin/bash
+fi
+</pre>
+<h2>Bash Stuff</h2>
+
+<pre>
+
+#docker run --name jdeepdream-json --volumes-from jdeepdream-compute -d ubuntu:14.04 /bin/bash -c "cd /opt/deepdream && ./
+#docker stop $(docker ps -aq)
+#docker rm $(docker ps -aq)
+
+sudo docker run --name image-processing -v /home/jack/key.pem:/key.pem -d -p 8888:8888 -e "PASSWORD=password" -v /notebooks:/notebooks jacknorthrup/darkroom:latest  tail -f /dev/null
+
+sudo docker run --name start-stuff -v `pwd`/notebooks/STUFF:/notebooks/STUFF -d jacknorthrup/darkroom:latest /bin/bash -c "cd /src && ./notebook.sh"
+
+sudo docker run -t -i --name darkroom-inside --volumes-from=darkroom-stuff jacknorthrup/darkroom:latest /bin/bash
+
+</pre>
+
+
+
+
+<a href="http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO-1.html">BASH STUFF</a>
+<pre>
+root@72efce76df14:/# jupyter notebook -h
+The Jupyter HTML Notebook.
+
+This launches a Tornado based HTML Notebook Server that serves up an
+HTML5/Javascript Notebook client.
+
+Subcommands
+-----------
+
+Subcommands are launched as `jupyter-notebook cmd [args]`. For information on
+using subcommand 'cmd', do: `jupyter-notebook cmd -h`.
+
+password
+    Set a password for the notebook server.
+list
+    List currently running notebook servers.
+
+Options
+-------
+
+Arguments that take values are actually convenience aliases to full
+Configurables, whose aliases are listed on the help line. For more information
+on full configurables, see '--help-all'.
+
+--script
+    DEPRECATED, IGNORED
+--pylab
+    DISABLED: use %pylab or %matplotlib in the notebook to enable matplotlib.
+--debug
+    set log level to logging.DEBUG (maximize logging output)
+--no-browser
+    Don't open the notebook in a browser after startup.
+--allow-root
+    Allow the notebook to be run from root user.
+-y
+    Answer yes to any questions instead of prompting.
+--no-mathjax
+    Disable MathJax
+    
+    MathJax is the javascript library Jupyter uses to render math/LaTeX. It is
+    very large, so you may want to disable it if you have a slow internet
+    connection, or for offline use of the notebook.
+    
+    When disabled, equations etc. will appear as their untransformed TeX source.
+--no-script
+    DEPRECATED, IGNORED
+--generate-config
+    generate default config file
+--certfile=<Unicode> (NotebookApp.certfile)
+    Default: u''
+    The full path to an SSL/TLS certificate file.
+--ip=<Unicode> (NotebookApp.ip)
+    Default: 'localhost'
+    The IP address the notebook server will listen on.
+--pylab=<Unicode> (NotebookApp.pylab)
+    Default: 'disabled'
+    DISABLED: use %pylab or %matplotlib in the notebook to enable matplotlib.
+--log-level=<Enum> (Application.log_level)
+    Default: 30
+    Choices: (0, 10, 20, 30, 40, 50, 'DEBUG', 'INFO', 'WARN', 'ERROR', 'CRITICAL')
+    Set the log level by value or name.
+--port-retries=<Integer> (NotebookApp.port_retries)
+    Default: 50
+    The number of additional ports to try if the specified port is not
+    available.
+--notebook-dir=<Unicode> (NotebookApp.notebook_dir)
+    Default: u''
+    The directory to use for notebooks and kernels.
+--keyfile=<Unicode> (NotebookApp.keyfile)
+    Default: u''
+    The full path to a private key file for usage with SSL/TLS.
+--client-ca=<Unicode> (NotebookApp.client_ca)
+    Default: u''
+    The full path to a certificate authority certificate for SSL/TLS client
+    authentication.
+--config=<Unicode> (JupyterApp.config_file)
+    Default: u''
+    Full path of a config file.
+--port=<Integer> (NotebookApp.port)
+    Default: 8888
+    The port the notebook server will listen on.
+--transport=<CaselessStrEnum> (KernelManager.transport)
+    Default: 'tcp'
+    Choices: [u'tcp', u'ipc']
+--browser=<Unicode> (NotebookApp.browser)
+    Default: u''
+    Specify what command to use to invoke a web browser when opening the
+    notebook. If not specified, the default browser will be determined by the
+    `webbrowser` standard library module, which allows setting of the BROWSER
+    environment variable to override it.
+
+To see all available configurables, use `--help-all`
+
+Examples
+--------
+
+    jupyter notebook                       # start the notebook
+    jupyter notebook --certfile=mycert.pem # use SSL/TLS certificate
+    jupyter notebook password              # enter a password to protect the server
+
+root@72efce76df14:/# locate mycert.pem
+locate: warning: database '/var/cache/locate/locatedb' is more than 8 days old (actual age is 506.2 days)
+root@72efce76df14:/# openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out certificate.pem
+Generating a 2048 bit RSA private key
+................................................+++
+......................................................+++
+writing new private key to 'key.pem'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:ph
+State or Province Name (full name) [Some-State]:gayagaya
+Locality Name (eg, city) []:sanjose
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:bb org
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:jack
+Email Address []:
+root@72efce76df14:/# 
+root@72efce76df14:/# ls
+bin   build            dev  home     lib    media  notebooks  proc  run   scripts  sys  usr
+boot  certificate.pem  etc  key.pem  lib64  mnt    opt        root  sbin  srv      tmp  var
+root@72efce76df14:/# openssl x509 -text -noout -in certificate.pem
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 14024939906409766469 (0xc2a298899dc11e45)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=ph, ST=gayagaya, L=sanjose, O=bb org, CN=jack
+        Validity
+            Not Before: Sep 29 03:09:54 2018 GMT
+            Not After : Sep 29 03:09:54 2019 GMT
+        Subject: C=ph, ST=gayagaya, L=sanjose, O=bb org, CN=jack
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:d9:b0:72:8a:03:ad:fe:98:42:5f:a5:cc:3a:ef:
+                    fb:7e:22:0c:52:b8:87:9f:1e:1d:50:62:f4:52:fe:
+                    41:c1:ac:a2:22:57:13:6f:8b:8e:92:8e:ad:e0:60:
+                    b2:65:18:63:17:13:4e:18:01:eb:6c:0f:ec:0c:20:
+                    41:49:b3:6c:3b:e8:cf:44:80:c6:58:e0:9b:9e:ed:
+                    21:fe:d8:b0:3e:aa:ba:57:e8:88:b2:a1:4d:10:83:
+                    f7:72:6d:69:52:a3:d2:3f:57:ed:5f:53:32:95:ef:
+                    b0:28:20:81:39:b9:b0:1b:03:5e:fc:e0:c4:a5:ab:
+                    5c:9a:21:70:8d:46:47:78:ff:94:52:51:8e:89:0f:
+                    c4:9f:30:57:76:bd:b5:cc:a7:be:4c:74:88:ab:71:
+                    18:e5:55:6d:33:c6:8b:06:90:fa:c2:ad:83:36:35:
+                    81:29:35:29:5b:a5:27:8e:03:cc:e3:3d:ff:73:02:
+                    28:4e:86:36:b6:fa:75:d9:df:51:fd:a6:3d:e0:44:
+                    71:1f:c5:a6:0d:41:a2:1e:59:c9:70:81:d6:79:f7:
+                    11:a8:4b:45:ee:31:ca:e5:e5:5c:f8:bf:b3:21:aa:
+                    9b:65:0a:94:8f:57:df:9a:f8:d7:f0:f5:7f:99:9f:
+                    ff:05:05:d5:b7:aa:de:6a:31:a2:54:49:bc:32:08:
+                    70:77
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Subject Key Identifier: 
+                F0:AF:13:47:B5:F5:76:CE:1F:FD:AD:99:56:D4:AF:A0:F4:2D:98:CE
+            X509v3 Authority Key Identifier: 
+                keyid:F0:AF:13:47:B5:F5:76:CE:1F:FD:AD:99:56:D4:AF:A0:F4:2D:98:CE
+
+            X509v3 Basic Constraints: 
+                CA:TRUE
+    Signature Algorithm: sha256WithRSAEncryption
+         85:5a:be:27:71:0a:5d:10:89:c7:20:42:3e:20:c6:0b:70:50:
+         1d:b6:29:ef:73:e3:14:cb:26:e6:9a:5e:25:2f:20:42:50:df:
+         43:42:82:8a:51:b2:27:5f:d3:f3:05:3d:ac:8d:91:e0:86:3e:
+         f2:c2:9b:15:d4:fe:d1:13:7e:93:40:7f:7c:49:fc:6b:da:fe:
+         e8:40:62:26:26:38:c3:82:71:35:e6:33:09:41:e1:53:ea:8f:
+         1f:59:56:57:7d:4f:3b:95:9c:b0:ca:f9:cd:d8:b5:34:40:75:
+         5a:96:1b:01:73:db:4e:a5:14:b2:bc:1a:87:8d:14:92:f2:fb:
+         c2:d7:de:34:83:60:9c:dc:5d:c2:ee:1a:7e:b9:0d:b3:a3:65:
+         a3:a5:2d:a2:a4:30:4a:d4:e4:89:af:8e:14:5f:04:03:d9:60:
+         bf:65:7e:00:84:57:08:31:84:58:65:d6:5d:12:80:7a:74:44:
+         2e:59:7a:ad:e2:45:c9:61:ad:5b:fd:75:7a:37:57:b7:a3:5b:
+         24:28:0b:13:cf:f7:55:46:ff:86:e6:f7:92:c8:80:6f:9d:5c:
+         bb:f7:d6:cc:d2:a5:5e:00:2b:f2:63:71:76:db:e7:9f:17:11:
+         01:92:58:d5:46:3e:82:ba:71:44:42:3c:b8:a1:a7:4c:44:90:
+         c9:4d:5f:93
+root@72efce76df14:/# openssl pkcs12 -inkey key.pem -in certificate.pem -export -out certificate.p12
+Enter Export Password:
+Verifying - Enter Export Password:
+root@72efce76df14:/# openssl pkcs12 -in certificate.p12 -noout -info
+Enter Import Password:
+MAC Iteration 2048
+MAC verified OK
+PKCS7 Encrypted data: pbeWithSHA1And40BitRC2-CBC, Iteration 2048
+Certificate bag
+PKCS7 Data
+Shrouded Keybag: pbeWithSHA1And3-KeyTripleDES-CBC, Iteration 2048
+root@72efce76df14:/# ls             
+bin   build            certificate.pem  etc   key.pem  lib64  mnt        opt   root  sbin     srv  tmp  var
+boot  certificate.p12  dev              home  lib      media  notebooks  proc  run   scripts  sys  usr
+root@72efce76df14:/# jupyter notebook -h
+The Jupyter HTML Notebook.
+
+This launches a Tornado based HTML Notebook Server that serves up an
+HTML5/Javascript Notebook client.
+
+Subcommands
+-----------
+
+Subcommands are launched as `jupyter-notebook cmd [args]`. For information on
+using subcommand 'cmd', do: `jupyter-notebook cmd -h`.
+
+password
+    Set a password for the notebook server.
+list
+    List currently running notebook servers.
+
+Options
+-------
+
+Arguments that take values are actually convenience aliases to full
+Configurables, whose aliases are listed on the help line. For more information
+on full configurables, see '--help-all'.
+
+--script
+    DEPRECATED, IGNORED
+--pylab
+    DISABLED: use %pylab or %matplotlib in the notebook to enable matplotlib.
+--debug
+    set log level to logging.DEBUG (maximize logging output)
+--no-browser
+    Don't open the notebook in a browser after startup.
+--allow-root
+    Allow the notebook to be run from root user.
+-y
+    Answer yes to any questions instead of prompting.
+--no-mathjax
+    Disable MathJax
+    
+    MathJax is the javascript library Jupyter uses to render math/LaTeX. It is
+    very large, so you may want to disable it if you have a slow internet
+    connection, or for offline use of the notebook.
+    
+    When disabled, equations etc. will appear as their untransformed TeX source.
+--no-script
+    DEPRECATED, IGNORED
+--generate-config
+    generate default config file
+--certfile=<Unicode> (NotebookApp.certfile)
+    Default: u''
+    The full path to an SSL/TLS certificate file.
+--ip=<Unicode> (NotebookApp.ip)
+    Default: 'localhost'
+    The IP address the notebook server will listen on.
+--pylab=<Unicode> (NotebookApp.pylab)
+    Default: 'disabled'
+    DISABLED: use %pylab or %matplotlib in the notebook to enable matplotlib.
+--log-level=<Enum> (Application.log_level)
+    Default: 30
+    Choices: (0, 10, 20, 30, 40, 50, 'DEBUG', 'INFO', 'WARN', 'ERROR', 'CRITICAL')
+    Set the log level by value or name.
+--port-retries=<Integer> (NotebookApp.port_retries)
+    Default: 50
+    The number of additional ports to try if the specified port is not
+    available.
+--notebook-dir=<Unicode> (NotebookApp.notebook_dir)
+    Default: u''
+    The directory to use for notebooks and kernels.
+--keyfile=<Unicode> (NotebookApp.keyfile)
+    Default: u''
+    The full path to a private key file for usage with SSL/TLS.
+--client-ca=<Unicode> (NotebookApp.client_ca)
+    Default: u''
+    The full path to a certificate authority certificate for SSL/TLS client
+    authentication.
+--config=<Unicode> (JupyterApp.config_file)
+    Default: u''
+    Full path of a config file.
+--port=<Integer> (NotebookApp.port)
+    Default: 8888
+    The port the notebook server will listen on.
+--transport=<CaselessStrEnum> (KernelManager.transport)
+    Default: 'tcp'
+    Choices: [u'tcp', u'ipc']
+--browser=<Unicode> (NotebookApp.browser)
+    Default: u''
+    Specify what command to use to invoke a web browser when opening the
+    notebook. If not specified, the default browser will be determined by the
+    `webbrowser` standard library module, which allows setting of the BROWSER
+    environment variable to override it.
+
+To see all available configurables, use `--help-all`
+
+Examples
+--------
+
+    jupyter notebook                       # start the notebook
+    jupyter notebook --certfile=mycert.pem # use SSL/TLS certificate
+    jupyter notebook password              # enter a password to protect the server
+
+root@72efce76df14:/# jupyter notebook --certfile=certificate.pem
+</pre>
+
+</body>
+</html>

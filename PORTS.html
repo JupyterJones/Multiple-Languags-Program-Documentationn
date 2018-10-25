@@ -1,0 +1,76 @@
+
+
+
+<h1>References regarding VNC and Ports</h1>
+
+<a href="https://oliverveits.wordpress.com/2016/04/28/running-gui-apps-with-docker-for-remote-access/">Reference-Oliverveits</a>
+<a href="https://blog.docker.com/2013/07/docker-desktop-your-desktop-over-ssh-running-inside-of-a-docker-container/">ssh-running-inside-of-a-docker</a>
+
+To find your port:
+wget http://ipinfo.io/ip -qO -
+
+
+docker port 6590118b3232
+docker port (container id)
+
+
+https://github.com/BlogBlocks/docker-desktop
+
+
+docker build -t [BlogBlocks]/docker-desktop git://github.com/rogaha/docker-desktop.git
+
+docker build -t jacklnorthrup/xpra-desktop git://github.com/BlogBlocks/docker-desktop.git
+
+<h2>dorowu/ubuntu-desktop-lxde-vnc</h2>
+<pre>
+jack@jack-desktop:/opt$ docker run -it --rm -p 6080:80 dorowu/ubuntu-desktop-lxde-vnc
+Unable to find image 'dorowu/ubuntu-desktop-lxde-vnc:latest' locally
+latest: Pulling from dorowu/ubuntu-desktop-lxde-vnc
+aafe6b5e13de: Already exists 
+0a2b43a72660: Already exists 
+18bdd1e546d2: Already exists 
+8198342c3e05: Already exists 
+f56970a44fd4: Already exists 
+da6ac41ac9c8: Pull complete 
+6f3a5e5efdea: Pull complete 
+d9dd7dde4295: Pull complete 
+ab365adf65d2: Pull complete 
+06b2cd083c64: Pull complete 
+c524c4444fb2: Pull complete 
+Digest: sha256:64925441b08f6c4fa4d0bd42ed19f2679039cc3a25a1b608a01ad5b1f7597b98
+Status: Downloaded newer image for dorowu/ubuntu-desktop-lxde-vnc:latest
+/usr/lib/python2.7/dist-packages/supervisor/options.py:297: UserWarning: Supervisord is running as root and it is searching for its configuration file in default locations (including its current working directory); you probably want to specify a "-c" argument specifying an absolute path to a configuration file for improved security.
+  'Supervisord is running as root and it is searching '
+2017-05-23 23:34:25,331 CRIT Supervisor running as root (no user in config file)
+2017-05-23 23:34:25,332 WARN Included extra file "/etc/supervisor/conf.d/supervisord.conf" during parsing
+2017-05-23 23:34:25,423 INFO RPC interface 'supervisor' initialized
+2017-05-23 23:34:25,423 CRIT Server 'unix_http_server' running without any HTTP authentication checking
+2017-05-23 23:34:25,424 INFO supervisord started with pid 16
+2017-05-23 23:34:26,427 INFO spawned: 'xvfb' with pid 23
+2017-05-23 23:34:26,430 INFO spawned: 'pcmanfm' with pid 24
+2017-05-23 23:34:26,433 INFO spawned: 'lxpanel' with pid 25
+2017-05-23 23:34:26,435 INFO spawned: 'lxsession' with pid 26
+2017-05-23 23:34:26,438 INFO spawned: 'x11vnc' with pid 27
+2017-05-23 23:34:26,445 INFO spawned: 'novnc' with pid 28
+2017-05-23 23:34:26,763 INFO exited: lxsession (exit status 1; not expected)
+2017-05-23 23:34:26,802 INFO exited: pcmanfm (exit status 1; not expected)
+2017-05-23 23:34:26,802 INFO exited: lxpanel (exit status 1; not expected)
+2017-05-23 23:34:27,543 INFO success: xvfb entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2017-05-23 23:34:27,544 INFO success: x11vnc entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2017-05-23 23:34:27,544 INFO success: novnc entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2017-05-23 23:34:27,799 INFO spawned: 'lxsession' with pid 44
+2017-05-23 23:34:27,814 INFO spawned: 'pcmanfm' with pid 45
+2017-05-23 23:34:27,817 INFO spawned: 'lxpanel' with pid 46
+2017-05-23 23:34:29,050 INFO success: pcmanfm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2017-05-23 23:34:29,051 INFO success: lxpanel entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2017-05-23 23:34:29,051 INFO success: lxsession entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+</pre>
+<h2>locate a process on a port and kill it </h2>
+$ netstat -an | grep ":8080"
+tcp        0      0 0.0.0.0:8080            0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.1:8080          127.0.0.1:56212         TIME_WAIT  
+tcp6       0      0 :::8080                 :::*                    LISTEN     
+jack@jack-desktop:~/Desktop/AI/giodegas_gzweb$ sudo kill $(sudo lsof -t -i:8080)
+jack@jack-desktop:~/Desktop/AI/giodegas_gzweb$ netstat -an | grep ":8080"
+
+
