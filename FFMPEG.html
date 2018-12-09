@@ -5,26 +5,32 @@
 </head>
 <body>
 
-<h1>ffmpeg</h1>
+<h1>ffmpeg Current install as of Dec 8</h1>
 <pre>
+    (universe) jack@jack-desktop:~/Desktop/docker-hub-git-lessons$ which ffmpeg
+    /home/jack/bin/ffmpeg
+
+
 First and foremost is the configuration of ffmpeg at time of installation. The configuration will determine what filters are available.
 installation files at ~/ffmpeg_sources
 
-ffmpeg
-ffmpeg version 4.0.2 Copyright (c) 2000-2018 the FFmpeg developers
-  built with gcc 4.8.2 (GCC) 20140120 (Red Hat 4.8.2-15)
-  configuration: --prefix=/home/jack/anaconda2/envs/py35 --disable-doc --disable-openssl --enable-shared --enable-static --extra-cflags='-Wall -g -m64 -pipe -O3 -march=x86-64 -fPIC' --extra-cxxflags='-Wall -g -m64 -pipe -O3 -march=x86-64 -fPIC' --extra-libs='-lpthread -lm -lz' --enable-zlib --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-hardcoded-tables --enable-avresample --enable-libfreetype --enable-gnutls --enable-libx264 --enable-libopenh264
-  libavutil      56. 14.100 / 56. 14.100
-  libavcodec     58. 18.100 / 58. 18.100
-  libavformat    58. 12.100 / 58. 12.100
-  libavdevice    58.  3.100 / 58.  3.100
-  libavfilter     7. 16.100 /  7. 16.100
+ffmpeg version N-92507-g027f032-0ubuntu0.16.04.1 Copyright (c) 2000-2018 the FFmpeg developers
+  built with gcc 4.8 (Ubuntu 4.8.5-4ubuntu8)
+  configuration: --prefix=/home/jack/ffmpeg_build --pkg-config-flags=--static --extra-cflags=-I/home/jack/ffmpeg_build/include --extra-ldflags=-L/home/jack/ffmpeg_build/lib --bindir=/home/jack/bin --extra-version=0ubuntu0.16.04.1 --build-suffix=-ffmpeg --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --enable-gpl --cc=gcc --cxx=g++ --enable-cross-compile --enable-version3 --enable-shared --disable-stripping --disable-decoder=libopenjpeg --enable-avresample --enable-avisynth --enable-libass --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libmp3lame --enable-libsnappy --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libwavpack --extra-cflags=-fPIC --enable-libx265 --enable-libxvid --enable-opengl --enable-libdc1394 --enable-frei0r --enable-libx264 --enable-libpulse --enable-indev=alsa --enable-outdev=alsa --enable-static --disable-debug --enable-libwebp --enable-libspeex --enable-fontconfig --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libvo-amrwbenc --enable-gray --enable-libopenjpeg --enable-libopus --enable-libsoxr --enable-libfribidi --enable-libzimg
+  libavutil      56. 23.101 / 56. 23.101
+  libavcodec     58. 39.100 / 58. 39.100
+  libavformat    58. 22.100 / 58. 22.100
+  libavdevice    58.  6.100 / 58.  6.100
+  libavfilter     7. 46.100 /  7. 46.100
   libavresample   4.  0.  0 /  4.  0.  0
-  libswscale      5.  1.100 /  5.  1.100
-  libswresample   3.  1.100 /  3.  1.100
-  libpostproc    55.  1.100 / 55.  1.100
+  libswscale      5.  4.100 /  5.  4.100
+  libswresample   3.  4.100 /  3.  4.100
+  libpostproc    55.  4.100 / 55.  4.100
 Hyper fast Audio and Video encoder
 usage: ffmpeg [options] [[infile options] -i infile]... {[outfile options] outfile}...
+
+Use -h to get full help or, even better, run 'man ffmpeg'
+
 
 </pre>
 <h1>ffmpeg2</h1>
@@ -406,9 +412,25 @@ ffmpeg -i Sleeping.mp4 -s 640x640 -t 00:05:13 -q:v 10 -ac 1 -c:v libx264 -strict
 ffmpeg -i in.mp4 -vf scale=640:640,pad=480:360:0:80 -strict -2 testout.mp4
 
 <a name="screen"></a> 
-<h2>I WILL USE THIS SREEN RECORDER</h2>
+<h1>I Use This Screen Recorder</h1>
 
 <pre>
+  USED DECEMBER 8, 2018:
+  Worked fine
+
+I have created a script to auto-capture a full screen with sound:
+it will capture the video and save it the current date in what ever directory it is run:
+
+------------------- scrCAP -----------------------
+#!/bin/bash
+ffmpeg -y  -f alsa -ac 2 -i hw:1,0 -strict -2 -f x11grab -framerate 30 -video_size 1360x766 -i :0.0 \
+-c:v libx264 -pix_fmt yuv420p -qp 0 -preset ultrafast $(date +%Y-%m-%d_%H:%M).mp4
+--------------------------------------------------
+
+ffmpeg -y  -f alsa -ac 2 -i hw:1,0 -strict -2 -f x11grab -framerate 30 -video_size 640x640 -i :0.0+360,100 -c:v libx264 -pix_fmt yuv420p -qp 0 -preset ultrafast VideoLast.mp4
+
+
+
  - NO ERRORS GREAT RECORDING - Works well with Gimp and Blender ;<br />
 works with HP3100 microphone or with headsets:<br />
 ffmpeg3 -thread_queue_size 768 -f alsa -i pulse -f x11grab -r 17 -s 1360x760 -i :0.0 -preset ultrafast -acodec pcm_s16le 0003.mkv 

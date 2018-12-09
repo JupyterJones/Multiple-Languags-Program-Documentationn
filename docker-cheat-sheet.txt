@@ -1,0 +1,187 @@
+
+
+<h1>https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes</h1>
+
+docker load -i /mnt/40ec525c-34bc-44ef-99c8-53f5524ad88b/Docker-Tars/continuumio-anaconda3-latest.tar
+
+mkdir /home/notebooks 
+jupyter notebook --notebook-dir=/home/notebooks --ip='*' --port=8888 --no-browser --allow-root
+
+
+https://nickjanetakis.com/blog/docker-tip-31-how-to-remove-dangling-docker-images
+
+docker build -t friendlyhello .  # Create image using this directory's Dockerfile
+docker run -p 4000:80 friendlyhello  # Run "friendlyname" mapping port 4000 to 80
+docker run -d -p 4000:80 friendlyhello         # Same thing, but in detached mode
+docker container ls                                # List all running containers
+docker container ls -a             # List all containers, even those not running
+docker container stop <hash>           # Gracefully stop the specified container
+docker container kill <hash>         # Force shutdown of the specified container
+docker container rm <hash>        # Remove specified container from this machine
+docker container rm $(docker container ls -a -q)         # Remove all containers
+docker image ls -a                             # List all images on this machine
+docker image rm <image id>            # Remove specified image from this machine
+docker image rm $(docker image ls -a -q)   # Remove all images from this machine
+docker login             # Log in this CLI session using your Docker credentials
+docker tag <image> username/repository:tag  # Tag <image> for upload to registry
+docker push username/repository:tag            # Upload tagged image to registry
+docker run username/repository:tag                   # Run image from a registry
+
+docker rmi $(docker images -q -f dangling=true)
+
+docker images -a |  grep "none"
+docker images -a | grep "none" | awk '{print $3}' | xargs docker rmi
+
+
+docker save -o continuumio-anaconda3-latest.tar continuumio-anaconda3-latest
+docker load -i continuumio-anaconda3-latest.tar
+docker commit <container> jacknorthrup/anaconda3-latest.tar
+--
+apt-get install -y lsb-release x11vnc xvfb nano htop locate tmux htop cmake golang libjpeg-dev twine libzbar-dev libzbar0
+mkdir ~/.vnc && x11vnc -storepasswd 1234 ~/.vnc/passwd
+pip install "gym[atari]" \
+pip install universe \
+pip install six \
+pip install tensorflow \
+
+
+
+---
+username jack
+password THEuniverse01
+
+
+
+
+docker run -p 5900 -e HOME=/ creack/firefox-vnc x11vnc -forever -usepw -create
+
+RUN     apt-get install -y x11vnc xvfb firefox
+RUN     mkdir ~/.vnc
+# Setup a password
+RUN     x11vnc -storepasswd 1234 ~/.vnc/passwd
+
+
+
+
+--------------
+FROM    ubuntu:12.04
+# Make sure the package repository is up to date
+RUN     echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
+RUN     apt-get update
+
+# Install vnc, xvfb in order to create a 'fake' display and firefox
+RUN     apt-get install -y x11vnc xvfb firefox
+RUN     mkdir ~/.vnc
+# Setup a password
+RUN     x11vnc -storepasswd 1234 ~/.vnc/passwd
+# Autostart firefox (might not be the best way to do it, but it does the trick)
+RUN     bash -c 'echo "firefox" >> /.bashrc'
+
+------------
+
+docker build -t xeyes - << __EOF__
+FROM debian
+RUN apt-get update
+RUN apt-get install -qqy x11-apps
+ENV DISPLAY :0
+CMD xeyes
+__EOF__
+XSOCK=/tmp/.X11-unix
+XAUTH=/tmp/.docker.xauth
+xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
+docker run -ti -v $XSOCK:$XSOCK -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH xeyes
+----------------------------
+FROM ubuntu:14.04
+
+RUN apt-get update && apt-get install -y firefox
+
+# Replace 1000 with your user / group id
+RUN export uid=1000 gid=1000 && \
+    mkdir -p /home/developer && \
+    echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
+    echo "developer:x:${uid}:" >> /etc/group && \
+    echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer && \
+    chmod 0440 /etc/sudoers.d/developer && \
+    chown ${uid}:${gid} -R /home/developer
+
+USER developer
+ENV HOME /home/developer
+CMD /usr/bin/firefox
+build the image:
+
+docker build -t firefox .
+and the run command:
+
+docker run -ti --rm \
+   -e DISPLAY=$DISPLAY \
+   -v /tmp/.X11-unix:/tmp/.X11-unix \
+   firefox
+
+------------------
+#Content of the entire Dockerfile
+#Dockerfile built to run Qxf2 POM tests and view the test running across chrome/firefox using VNC viewer
+FROM qxf2rohand/qxf2_pom_essentials
+MAINTAINER Qxf2 Services
+ 
+#Upgrade pip, install Git & VNC 	
+RUN pip install --upgrade pip \
+        && apt-get update \
+	&& apt-get install -y git x11vnc 
+ 
+# Add entrypoint.sh and other available files to image
+ADD . /usr/qxf2_pom
+ 
+#Change directory and clone Qxf2 Public POM repo
+RUN cd /usr/qxf2_pom \
+	&& git clone https://github.com/qxf2/qxf2-page-object-model.git 
+ 
+#Set envirnmental variable for display	
+ENV DISPLAY :20
+ 
+#Set working directory
+WORKDIR /usr/qxf2_pom/qxf2-page-object-model
+ 
+#Install requirements using requirements.txt 
+RUN pip install -r requirements.txt 
+ 
+#Provide read, write and execute permissions for entrypoint.sh and also take care of '\r' error which raised when someone uses notepad or note++ for editing in Windows.
+RUN chmod 755 /usr/qxf2_pom/entrypoint.sh \
+	&& sed -i 's/\r$//' /usr/qxf2_pom/entrypoint.sh
+ 
+#Expose port 5920 to view display using VNC Viewer
+EXPOSE 5920
+ 
+#Execute entrypoint.sh at start of container
+ENTRYPOINT ["/usr/qxf2_pom/entrypoint.sh"]
+The shell script file i.e. entrypoint.sh file below will help to configure and run the VNC server along with starting the xvfb, pulling the code from git and then running the test.
+
+#!/bin/bash
+# entrypoint.sh file for starting the xvfb with better screen resolution, configuring and running the vnc server, pulling the code from git and then running the test.
+export DISPLAY=:20
+Xvfb :20 -screen 0 1366x768x16 &
+x11vnc -passwd TestVNC -display :20 -N -forever &
+cd /usr/qxf2_pom/qxf2-page-object-model/
+git pull
+pytest -B chrome -s -v > pytest_report.log
+wait
+To create an image using above dockerfile, you need to save both files at same directory and use the following command:
+
+docker build -t new-image-name Path/to/Dockerfile
+Step 2. Setup VNC viewer on your local machine
+VNC server sends/transmit display data information over a specified port. To catch and read that data, we need to get setup with VNC viewer which acts as a client. VNC viewer is available for multiple platforms, you can download it for your platform from RealVNC and install it.
+
+Step 3. Connect to the VNC server using IP and Port Address
+To connect VNC viewer to VNC server, you need to know the IP address and port address.
+
+Get IP Address: You need to use the following command to get IP Address.
+
+docker-machine ip
+NOTE: docker-machine ip command won’t work on Linux. Use host name i.e. ‘localhost’ instead of IP address.
+
+Get PORT address: Port address will depend on ‘docker run’ command. In step 1, we built an image which includes VNC server and our Qxf2 public pom code. When we create Docker container using the following command, it will enable display along with Xvfb, VNC server and run the test across chrome.
+
+docker run -it -p 5920:5920 image-name-which-provided-in-step-1
+Above command connects/maps local host port 5920 to container port 5920 and to view the running tests on display, you need to connect with VNC server quickly because once test run gets finished it will show you only black screen.
+
+Now, we know both IP and port address. Next, we need to connect with VNC viewer using both IP and port address. To connect with VNC Viewer, you need to follow following steps.
+

@@ -1,0 +1,133 @@
+ 
+
+
+
+ Add to the End of an Array Using push()
+
+The push() method will add an element to the end of an array, while its twin function, the pop() method, will remove an element from the end of the array.
+
+To add an element to the end of an array using push(), you would do this:
+1
+2
+3
+	
+var list = ["foo", "bar"];
+list.push("baz");
+["foo", "bar", "baz"] // result
+
+You can also add multiple elements to an array using push(), as shown below:
+1
+2
+3
+	
+var list = ["foo", "bar"];
+list.push("baz", "qux", "etcetera");
+["foo", "bar", "baz", "qux", "etcetera"] // result
+
+If you need to add an element or multiple elements to the end of an array, the push() method will almost always be your simplest and quickest option.
+Add to the Beginning of an Array Using unshift()
+
+The unshift() method will add an element to the beginning of an array, while its twin function, shift(), will remove one element from the beginning of the array.
+
+To add an element to the beginning of an array using unshift() try this:
+1
+2
+3
+	
+var list = ["foo", "bar"];
+list.unshift("baz");
+["baz", "foo", "bar"] // result
+
+To add multiple elements to the beginning of an array using unshift() try this:
+1
+2
+3
+	
+var list = ["foo", "bar"];
+list.unshift("baz", "qux");
+["baz", "qux", "foo", "bar"] // result
+
+If you need to add elements to the beginning of an array, the unshift() method will almost always be your simplest and quickest option.
+Add Element(s) to the Middle of an Array Using splice()
+
+The splice() method modifies the content of an array by removing existing elements and/or adding new elements.
+
+Below you’ll find the proper splice() function syntax:
+1
+	
+array.splice( start, deleteCount [, item1 [, item2 [, ...] ] ] )
+
+If you want to insert an element (or elements) into a particular point somewhere within the array, besides the beginning or end, then you should most likely be using the splice() method.
+
+To use splice() your code should look like this:
+1
+2
+3
+4
+	
+var list = ["foo", "bar"];
+list.splice( 1, 0, "baz"); // at index position 1, remove 0 elements, then add "baz" to that position
+                           // element "bar" will now automatically be moved to index position 2
+["foo", "baz", "bar"] // result
+
+To add multiple elements in the middle of an array using splice() try this:
+1
+2
+3
+	
+var list = ["foo", "bar"];
+list.splice( 1, 0, "baz", "qux");
+["foo", "baz", "qux", "bar"] // result
+
+The splice command is like the Swiss Army Knife of array manipulation; however, you should first try using the much simpler push or unshift commands before using splice() to add to an array.
+Add to an Array By Forming a New Array Using concat()
+
+The concat() method returns a new combined array comprised of the array on which it is called, joined with the array (or arrays) from its argument.
+
+To add some elements to another array using concat() do the following:
+1
+2
+3
+	
+var list = ["foo", "bar"];
+var newlist = list.concat( ["baz", "qux"] );
+["foo", "bar", "baz", "qux"] // newlist result
+
+It is also possible to directly add non-array values using concat():
+1
+2
+3
+	
+var list = ["foo", "bar"];
+var newlist = list.concat( "baz", "qux" );
+["foo", "bar", "baz", "qux"] // newlist result
+
+The concat() method is a simple solution in situations where you need to combine some arrays together, without bloating your code with for loops or other iterative loops.
+Add an Array Element at a Particular Index Using Index Notation
+
+We can also directly manipulate the array, without the use of any array methods, by referring to the index position within the array.
+
+Here we add two new elements at specified positions:
+1
+2
+3
+4
+	
+var list = ["foo", "bar"];
+list[2] = "baz"; // add element "baz" to the index position 2 in the array
+list[3] = "qux";
+["foo", "bar", "baz", "qux"] // result
+
+Here we add an element to the end of the array:
+1
+2
+3
+	
+var list = ["foo", "bar"];
+list[ list.length ] = "baz"; // add element "baz" to the end of the array
+["foo", "bar", "baz"] // result
+
+The index notation method is often useful when you know exactly where to place an element in the array, regardless of where that position may be. This situation often applies to many sorts of algorithm implementations.
+Final Words on Adding to an Array in JavaScript
+
+Adding an element to an array in JavaScript is pretty simple, as it should be, but no one single method is always the best to use. Hopefully you can now feel confident in when to use a particular array-expanding approach in various code contexts. As always, if you have additional questions, comments, additions, or subtractions, give us a heads up below.

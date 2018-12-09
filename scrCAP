@@ -1,0 +1,3 @@
+#!/bin/bash
+ffmpeg -y  -f alsa -ac 2 -i hw:1,0 -strict -2 -f x11grab -framerate 30 -video_size 1360x766 -i :0.0 \
+-c:v libx264 -pix_fmt yuv420p -qp 0 -preset ultrafast $(date +%Y-%m-%d_%H:%M).mp4

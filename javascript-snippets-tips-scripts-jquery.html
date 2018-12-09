@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+html{
+   background-color: #900C3F;
+}
+.head {
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    width: 95%;
+    padding: 1%;
+    min-height: 75px; 
+    height: auto; /* Should be removed. Only for demonstration */
+    text-align: center;
+    color: yellow;
+    background-color: #900C3F;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+}
+.col-container {
+    width: 95%;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    display: table;
+    border-width: 1px;
+    border-color: red;
+    border-style: solid;
+    height: 1200px;
+    background-color:  #DAF7A6;   
+    
+}
+.col1 {
+    color: black;
+    display: table-cell;
+    padding: 10px;
+    width: 25%;
+    text-align: left;
+}
+.col2 {
+    color: black;
+    text-align:left;
+    display: table-cell;
+    padding: 10px;
+    width:75%;
+}
+footer {
+    position: relative;
+    margin-top: 20px; /* negative value of footer height */
+    height: 180px;
+    clear: both;
+    border-width: 1px;
+    border-color: red;
+    border-style: black;
+    height: 80px;
+    background-color: #900C3F;
+    padding: 20px;
+    color:orange;
+}
+pre {
+   white-space: pre-wrap;       /* css-3 */
+   white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+   white-space: -pre-wrap;      /* Opera 4-6 */
+   white-space: -o-pre-wrap;    /* Opera 7 */
+   word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+.notice{
+  font-size:22px;
+  color:navy;
+}
+</style>
+</head>
+<body>
+
+  <div class="col-container">
+      <div class ="head">
+
+        <h2>Javascript Snippets Tips Scripts Jquery</h2>
+        <p>Javascript Snippets Tips Scripts Jquery contains information on formating, graphics, and animation.</p>
+
+        <!--div class="col-container" -->
+          <div class="col1" style="background:yellow">
+            <h2>Document Links</h2>
+            <p>List of links to computer and programming topics</p>
+              <ul>
+               <li><a href ="app-info.html">Python Flask app-info</a></li>
+               <li><a href ="28jupyternotebooktips.pdf">28jupyternotebooktips.pdf</a></li>
+               <li><a href ="AnacondaPython.html">AnacondaPython.html</a></li>
+               <li><a href ="Bash.html">BASH STUFF</a></li>
+               <li><a href ="c++.html">c++.html</a></li>
+               <li><a href ="CAFFE_STUFF.html">CAFFE_STUFF.html</a></li>
+               <li><a href ="C++_Information.html">C++_Information.html</a></li>
+               <li><a href ="conda-cheatsheet.pdf">conda-cheatsheet.pdf</a></li>
+               <li><a href ="conda-cheatsheet-.pdf">conda-cheatsheet.pdf</a></li>
+               <li><a href ="DataBase.html">DataBase</a></li>
+               <li><a href ="DeepDreamStuff.html">DeepDream Info</a></li>
+               <li><a href ="DOCKER.html">DOCKER.html</a></li>
+               <li><a href ="DOCKER-bak.html">DOCKER.html</a></li>
+               <li><a href ="Dockerfiles.html">DOCKER files</a></li>
+               <li><a href ="dockerimages.html">DOCKER Images</a></li>
+               <li><a href ="Dockfile.html">DOCKER - Dockerfiles</a></li>
+               <li><a href ="documents.html">Documents</a></li>
+               <li><a href ="FFMPEG.html">FFMPEG</a></li>
+               <li><a href ="FFMPEG-with-instagram.html">FFMPEG-Instagram</a></li>
+               <li><a href ="images.html">Images</a></li>
+               <li><a href ="index.html">HOME</a></li>
+               <li><a href ="IPython.html">IPython</a></li>
+               <li><a href ="jacknorthrup-torchjupzbaevnc_BUILD_START.html">Build Start</a></li>
+               <li><a href ="jupyter.pdf">Jupyter Pdf</a></li>
+               <li><a href ="jupyter-notebook.html">Jupyter Notebook</a></li>
+               <li><a href ="key-pem-csr-info.html">key-pem-csr-info</a></li>
+               <li><a href ="Linux_Shortcuts.pdf">Linux_Shortcuts.pdf</a></li>
+               <li><a href ="misc_info.html">Misc Info</a></li>
+               <li><a href ="MoveDockerImages.html">MoveDockerImages</a></li>
+               <li><a href ="MySQL.html">MySQL</a></li>
+               <li><a href ="MySQL-Forms-Scripts.html">MySQL-Forms-Scripts</a></li>
+               <li><a href ="OpenCV.html">OpenCV</a></li>
+               <li><a href ="OpenShift.html">OpenShift</a></li>
+               <li><a href ="pil-handbook.pdf">PIL Handbook</a></li>
+               <li><a href ="PORTS.html">Ports</a></li>
+               <li><a href ="python.html">Python</a></li>
+               <li><a href ="sql-docker.html">OpenCV</a></li>
+               <li><a href ="STARTUPS.html">OpenCV</a></li>
+               <li><a href ="search-for-linux-modules-packages.html">Search For Linux Modules Packages</a></li>
+               </ul>   
+    </div>
+
+    <div class="col2" style="background:orange">
+      <h2>javascript-snippets-tips-scripts-jquery</h2>
+      <p>Using Javascript to manipulate lists</p>
+       
+<span class ="notice">Javascripty can add to the End of an Array Using push()</span>
+<pre>
+The push() method is used to add an element to the end of an array. To remove an element from the end of the array, use pop().
+
+var list = [];
+list.push("one");
+list.push("two");
+list.push("three");
+
+result:
+["one", "two", "three"]
+
+You can also add several elements at a time using push().
+Example:
+
+var list = ["one", "two", "three"];
+list.push("AAA", "BBB", "CCC");
+resulting in 
+["one", "two", "three", "AAA", "BBB", "CCC"]
+
+
+If you need to add an element or multiple elements to the end of an array, the push() method will almost always be your simplest and quickest option.
+Add to the Beginning of an Array Using unshift()
+
+The unshift() method will add an element to the beginning of an array, while its twin function, shift(), will remove one element from the beginning of the array.
+
+To add an element to the beginning of an array using unshift() try this:
+ 
+var list = ["foo", "bar"];
+list.unshift("baz");
+["baz", "foo", "bar"] // result
+
+To add multiple elements to the beginning of an array using unshift() try this:
+  
+var list = ["foo", "bar"];
+list.unshift("baz", "qux");
+["baz", "qux", "foo", "bar"] // result
+
+If you need to add elements to the beginning of an array, the unshift() method will almost always be your simplest and quickest option.
+Add Element(s) to the Middle of an Array Using splice()
+
+The splice() method modifies the content of an array by removing existing elements and/or adding new elements.
+
+Below you’ll find the proper splice() function syntax:
+  
+array.splice( start, deleteCount [, item1 [, item2 [, ...] ] ] )
+
+If you want to insert an element (or elements) into a particular point somewhere within the array, besides the beginning or end, then you should most likely be using the splice() method.
+
+To use splice() your code should look like this:
+  
+var list = ["foo", "bar"];
+list.splice( 1, 0, "baz"); // at index position 1, remove 0 elements, then add "baz" to that position
+                           // element "bar" will now automatically be moved to index position 2
+["foo", "baz", "bar"] // result
+
+To add multiple elements in the middle of an array using splice() try this:
+  
+var list = ["foo", "bar"];
+list.splice( 1, 0, "baz", "qux");
+["foo", "baz", "qux", "bar"] // result
+
+The splice command is like the Swiss Army Knife of array manipulation; however, you should first try using the much simpler push or unshift commands before using splice() to add to an array.
+Add to an Array By Forming a New Array Using concat()
+
+The concat() method returns a new combined array comprised of the array on which it is called, joined with the array (or arrays) from its argument.
+
+To add some elements to another array using concat() do the following:
+ 
+var list = ["foo", "bar"];
+var newlist = list.concat( ["baz", "qux"] );
+["foo", "bar", "baz", "qux"] // newlist result
+
+It is also possible to directly add non-array values using concat():
+  
+var list = ["foo", "bar"];
+var newlist = list.concat( "baz", "qux" );
+["foo", "bar", "baz", "qux"] // newlist result
+
+The concat() method is a simple solution in situations where you need to combine some arrays together, without bloating your code with for loops or other iterative loops.
+Add an Array Element at a Particular Index Using Index Notation
+
+We can also directly manipulate the array, without the use of any array methods, by referring to the index position within the array.
+
+Here we add two new elements at specified positions:
+  
+var list = ["foo", "bar"];
+list[2] = "baz"; // add element "baz" to the index position 2 in the array
+list[3] = "qux";
+["foo", "bar", "baz", "qux"] // result
+
+Here we add an element to the end of the array:
+  
+var list = ["foo", "bar"];
+list[ list.length ] = "baz"; // add element "baz" to the end of the array
+["foo", "bar", "baz"] // result
+</pre>
+<p>
+The index notation method is often useful when you know exactly where to place an element in the array, regardless of where that position may be. This situation often applies to many sorts of algorithm implementations.
+Final Words on Adding to an Array in JavaScript
+</p>
+<p>
+Adding an element to an array in JavaScript is pretty simple, as it should be, but no one single method is always the best to use. Hopefully you can now feel confident in when to use a particular array-expanding approach in various code contexts. As always, if you have additional questions, comments, additions, or subtractions, give us a heads up below.
+</p>
+    </div>
+     <footer>This is a footer</footer>
+  </div>
+   
+</div>
+
+</body>
+</html>

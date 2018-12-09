@@ -1,0 +1,531 @@
+
+<html>
+<head>
+<title>Jupyter notebook with Universe-Starter-Agent - gym-universe</title>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<body>
+
+<h1>Universe-Starter-Agent - gym-universe -Jupyter notebook</h1>
+<pre>
+jack@jack-desktop:~$ conda create --name universe-starter-agent python=3.5
+Solving environment: done
+
+## Package Plan ##
+  environment location: /home/jack/miniconda3/envs/universe-starter-agent
+  added / updated specs: 
+    - python=3.5
+The following packages will be downloaded:
+    package                    |            build
+    ---------------------------|-----------------
+    wheel-0.31.1               |           py35_0          63 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    pip-10.0.1                 |           py35_0         1.8 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    ncurses-6.1                |       hf484d3e_0         943 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    sqlite-3.25.2              |       h7b6447c_0         1.9 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    certifi-2018.8.24          |           py35_1         139 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    openssl-1.0.2p             |       h14c3975_0         3.5 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libffi-3.2.1               |       hd88cf55_4          43 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    python-3.5.6               |       hc3d631a_0        28.3 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    ca-certificates-2018.03.07 |                0         124 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    xz-5.2.4                   |       h14c3975_4         366 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libedit-3.1.20170329       |       h6b74fdf_2         172 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    readline-7.0               |       h7b6447c_5         392 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libstdcxx-ng-8.2.0         |       hdf63c60_1         2.9 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    setuptools-40.2.0          |           py35_0         571 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libgcc-ng-8.2.0            |       hdf63c60_1         7.6 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    zlib-1.2.11                |       ha838bed_2         101 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    tk-8.6.8                   |       hbc83047_0         3.1 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    ------------------------------------------------------------
+                                           Total:        51.9 MB
+
+The following NEW packages will be INSTALLED:
+
+    ca-certificates: 2018.03.07-0            https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    certifi:         2018.8.24-py35_1        https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libedit:         3.1.20170329-h6b74fdf_2 https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libffi:          3.2.1-hd88cf55_4        https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libgcc-ng:       8.2.0-hdf63c60_1        https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libstdcxx-ng:    8.2.0-hdf63c60_1        https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    ncurses:         6.1-hf484d3e_0          https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    openssl:         1.0.2p-h14c3975_0       https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    pip:             10.0.1-py35_0           https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    python:          3.5.6-hc3d631a_0        https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    readline:        7.0-h7b6447c_5          https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    setuptools:      40.2.0-py35_0           https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    sqlite:          3.25.2-h7b6447c_0       https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    tk:              8.6.8-hbc83047_0        https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    wheel:           0.31.1-py35_0           https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    xz:              5.2.4-h14c3975_4        https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    zlib:            1.2.11-ha838bed_2       https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+
+Proceed ([y]/n)? y
+
+
+Downloading and Extracting Packages
+wheel-0.31.1         | 63 KB     | ##################################### | 100% 
+pip-10.0.1           | 1.8 MB    | ##################################### | 100% 
+ncurses-6.1          | 943 KB    | ##################################### | 100% 
+sqlite-3.25.2        | 1.9 MB    | ##################################### | 100% 
+certifi-2018.8.24    | 139 KB    | ##################################### | 100% 
+openssl-1.0.2p       | 3.5 MB    | ##################################### | 100% 
+libffi-3.2.1         | 43 KB     | ##################################### | 100% 
+python-3.5.6         | 28.3 MB   | ##################################### | 100% 
+ca-certificates-2018 | 124 KB    | ##################################### | 100% 
+xz-5.2.4             | 366 KB    | ##################################### | 100% 
+libedit-3.1.20170329 | 172 KB    | ##################################### | 100% 
+readline-7.0         | 392 KB    | ##################################### | 100% 
+libstdcxx-ng-8.2.0   | 2.9 MB    | ##################################### | 100% 
+setuptools-40.2.0    | 571 KB    | ##################################### | 100% 
+libgcc-ng-8.2.0      | 7.6 MB    | ##################################### | 100% 
+zlib-1.2.11          | 101 KB    | ########################################################################################################## | 100% 
+tk-8.6.8             | 3.1 MB    | ########################################################################################################## | 100% 
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+#
+# To activate this environment, use:
+# > source activate universe-starter-agent
+#
+# To deactivate an active environment, use:
+# > source deactivate
+#
+
+jack@jack-desktop:~$ source activate universe-starter-agent
+(universe-starter-agent) jack@jack-desktop:~$ ls
+2torch            glog-0.3.3                     key.pem                            NXGIN                           ssl-permissions.sh
+apache            gym                            key-pem-csr-info.html              Older-torch                     startpy2
+build             hidden                         key.pem.pub                        opencv                          startpy3
+caffe             ImageMagick-7.0.8-13           libtool                            opencv-3.4.2                    Templates
+centos            ImageMagick.tar.gz             links-xx                           opencv_contrib                  texput.log
+centos.save       install-caffe.sh               linux_signing_key.pub              outline.ipynb.save              TEXT
+certs             install-caffe-ubuntu-16.04.sh  lmdb                               phpsqlmyadmin                   ThreadsDemo
+cling             install-libc                   local-npm                          Pictures                        torch
+cv                install-Torch                  lua-5.1.1                          pipeit                          torch-hdf5
+data              install-torch.sh               lua-5.1.1.tar.gz                   pipeit2                         universe
+demos             install.txt                    lua-5.1.4                          protobuf                        Untitled1.ipynb
+Desktop           install.universe               lua-5.1.4.tar.gz                   protobuf-2.5.0                  Untitled.ipynb
+distro            ipynb.txt                      lua-5.1.5                          protobuf-2.5.0.tar.gz           v0.3.3.tar.gz
+dlopen            Jav8                           LuaDist                            protobuf-3.2.0                  Videos
+Documents         javakernel                     luarocks                           protoc-2.5.0                    viewer
+Downloads         Johnson                        luarocks-3.0.3                     protoc-3.0.0                    workspace
+dpkg.list         js.txt                         luarocks-3.0.3.tar.gz              protoc-3.2.0                    xanaconda2
+Dtorch            junk-SDL2-master               master.zip                         Public                          xeus-cling
+examples.desktop  junk-sqlite3                   master.zip.1                       pygtk                           XXtorch
+fix.sh            jupterlb                       miniconda3                         SDL                             xxx.log
+freeze.txt        jupyter-jack                   Miniconda3-latest-Linux-x86_64.sh  snap                            ZBStudio
+GETip             jupyterlab                     Music                              sqlite                          zips.txt
+git               jupyterlb                      NGtorch                            sqlite-autoconf-3250200.tar.gz
+glibc_install     jupyter-nodejs                 notebooks                          SRall
+(universe-starter-agent) jack@jack-desktop:~$ cd universe
+(universe-starter-agent) jack@jack-desktop:~/universe$ ls
+CODE_OF_CONDUCT.rst  Dockerfile  ISSUE_TEMPLATE  Makefile                           miniconda-install.info  setup.py         tests    universe
+doc                  example     LICENSE         Miniconda3-latest-Linux-x86_64.sh  README.rst              test.dockerfile  tox.ini
+(universe-starter-agent) jack@jack-desktop:~/universe$ nano install-universe-starter-agent.info
+(universe-starter-agent) jack@jack-desktop:~/universe$ ls
+CODE_OF_CONDUCT.rst  example                              LICENSE                            miniconda-install.info  test.dockerfile  universe
+doc                  install-universe-starter-agent.info  Makefile                           README.rst              tests
+Dockerfile           ISSUE_TEMPLATE                       Miniconda3-latest-Linux-x86_64.sh  setup.py                tox.ini
+(universe-starter-agent) jack@jack-desktop:~/universe$ nano install-universe-in-universe-starter-agent.sh
+(universe-starter-agent) jack@jack-desktop:~/universe$ chmod +x install-universe-in-universe-starter-agent.sh
+(universe-starter-agent) jack@jack-desktop:~/universe$ ./install-universe-in-universe-starter-agent.sh
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+cmake is already the newest version (3.10.2-1ubuntu2).
+htop is already the newest version (2.1.0-3).
+libjpeg-dev is already the newest version (8c-2ubuntu8).
+The following additional packages will be installed:
+  golang-1.10 golang-1.10-doc golang-1.10-go golang-1.10-race-detector-runtime golang-1.10-src golang-doc golang-go golang-race-detector-runtime
+  golang-src
+Suggested packages:
+  bzr subversion
+The following NEW packages will be installed:
+  golang golang-1.10 golang-1.10-doc golang-1.10-go golang-1.10-race-detector-runtime golang-1.10-src golang-doc golang-go
+  golang-race-detector-runtime golang-src tmux
+0 upgraded, 11 newly installed, 0 to remove and 35 not upgraded.
+Need to get 43.0 MB of archives.
+After this operation, 230 MB of additional disk space will be used.
+Get:1 http://mirrors.ubuntu.com/mirrors.txt Mirrorlist [63 B]
+Get:3 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 golang-1.10-go amd64 1.10.4-2ubuntu1~18.04.1 [28.6 MB]
+Get:2 http://mirror.rise.ph/ubuntu bionic-updates/main amd64 golang-1.10-src amd64 1.10.4-2ubuntu1~18.04.1 [11.1 MB]
+Get:5 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 golang-1.10 all 1.10.4-2ubuntu1~18.04.1 [11.2 kB]                                  
+Get:6 http://archive.ubuntu.com/ubuntu bionic/main amd64 golang-src amd64 2:1.10~4ubuntu1 [3,676 B]                                                 
+Get:7 http://archive.ubuntu.com/ubuntu bionic/main amd64 golang-go amd64 2:1.10~4ubuntu1 [22.0 kB]                                                  
+Get:11 http://archive.ubuntu.com/ubuntu bionic/main amd64 tmux amd64 2.6-3 [248 kB]                                                                 
+Get:4 http://mirror.rise.ph/ubuntu bionic-updates/main amd64 golang-1.10-doc all 1.10.4-2ubuntu1~18.04.1 [2,419 kB]                                 
+Get:8 http://mirror.rise.ph/ubuntu bionic/main amd64 golang-doc all 2:1.10~4ubuntu1 [2,944 B]                                                       
+Get:9 http://mirror.rise.ph/ubuntu bionic/main amd64 golang amd64 2:1.10~4ubuntu1 [2,896 B]                                                         
+Get:10 http://mirror.rise.ph/ubuntu bionic/main amd64 golang-1.10-race-detector-runtime amd64 0.0+svn285455-0ubuntu1 [478 kB]                       
+Get:12 http://mirror.rise.ph/ubuntu bionic/main amd64 golang-race-detector-runtime amd64 2:1.10~4ubuntu1 [3,456 B]                                  
+Fetched 43.0 MB in 4min 11s (171 kB/s)                                                                                                              
+Selecting previously unselected package golang-1.10-src.
+(Reading database ... 365849 files and directories currently installed.)
+Preparing to unpack .../00-golang-1.10-src_1.10.4-2ubuntu1~18.04.1_amd64.deb ...
+Unpacking golang-1.10-src (1.10.4-2ubuntu1~18.04.1) ...
+Selecting previously unselected package golang-1.10-go.
+Preparing to unpack .../01-golang-1.10-go_1.10.4-2ubuntu1~18.04.1_amd64.deb ...
+Unpacking golang-1.10-go (1.10.4-2ubuntu1~18.04.1) ...
+Selecting previously unselected package golang-1.10-doc.
+Preparing to unpack .../02-golang-1.10-doc_1.10.4-2ubuntu1~18.04.1_all.deb ...
+Unpacking golang-1.10-doc (1.10.4-2ubuntu1~18.04.1) ...
+Selecting previously unselected package golang-1.10.
+Preparing to unpack .../03-golang-1.10_1.10.4-2ubuntu1~18.04.1_all.deb ...
+Unpacking golang-1.10 (1.10.4-2ubuntu1~18.04.1) ...
+Selecting previously unselected package golang-src.
+Preparing to unpack .../04-golang-src_2%3a1.10~4ubuntu1_amd64.deb ...
+Unpacking golang-src (2:1.10~4ubuntu1) ...
+Selecting previously unselected package golang-go.
+Preparing to unpack .../05-golang-go_2%3a1.10~4ubuntu1_amd64.deb ...
+Unpacking golang-go (2:1.10~4ubuntu1) ...
+Selecting previously unselected package golang-doc.
+Preparing to unpack .../06-golang-doc_2%3a1.10~4ubuntu1_all.deb ...
+Unpacking golang-doc (2:1.10~4ubuntu1) ...
+Selecting previously unselected package golang.
+Preparing to unpack .../07-golang_2%3a1.10~4ubuntu1_amd64.deb ...
+Unpacking golang (2:1.10~4ubuntu1) ...
+Selecting previously unselected package golang-1.10-race-detector-runtime.
+Preparing to unpack .../08-golang-1.10-race-detector-runtime_0.0+svn285455-0ubuntu1_amd64.deb ...
+Unpacking golang-1.10-race-detector-runtime (0.0+svn285455-0ubuntu1) ...
+Selecting previously unselected package tmux.
+Preparing to unpack .../09-tmux_2.6-3_amd64.deb ...
+Unpacking tmux (2.6-3) ...
+Selecting previously unselected package golang-race-detector-runtime.
+Preparing to unpack .../10-golang-race-detector-runtime_2%3a1.10~4ubuntu1_amd64.deb ...
+Unpacking golang-race-detector-runtime (2:1.10~4ubuntu1) ...
+Setting up golang-1.10-race-detector-runtime (0.0+svn285455-0ubuntu1) ...
+Setting up golang-race-detector-runtime (2:1.10~4ubuntu1) ...
+Setting up golang-1.10-src (1.10.4-2ubuntu1~18.04.1) ...
+Setting up tmux (2.6-3) ...
+Processing triggers for man-db (2.8.3-2) ...
+Setting up golang-src (2:1.10~4ubuntu1) ...
+Setting up golang-1.10-go (1.10.4-2ubuntu1~18.04.1) ...
+Setting up golang-1.10-doc (1.10.4-2ubuntu1~18.04.1) ...
+Setting up golang-go (2:1.10~4ubuntu1) ...
+Setting up golang-1.10 (1.10.4-2ubuntu1~18.04.1) ...
+Setting up golang-doc (2:1.10~4ubuntu1) ...
+Setting up golang (2:1.10~4ubuntu1) ...
+Collecting gym[atari]
+  Downloading https://files.pythonhosted.org/packages/c3/44/3a63e8b87f642db49ac81239620e68df8cfae223dcfda4f8508aec88d204/gym-0.10.8.tar.gz (1.5MB)
+    100% |████████████████████████████████| 1.5MB 58kB/s 
+Collecting scipy (from gym[atari])
+  Downloading https://files.pythonhosted.org/packages/cd/32/5196b64476bd41d596a8aba43506e2403e019c90e1a3dfc21d51b83db5a6/scipy-1.1.0-cp35-cp35m-manylinux1_x86_64.whl (33.1MB)
+    100% |████████████████████████████████| 33.1MB 119kB/s 
+Collecting numpy>=1.10.4 (from gym[atari])
+  Downloading https://files.pythonhosted.org/packages/98/d6/ebc4f752b683d190361248ecce4d5a0977b5c483370aa7ff63b733e8f011/numpy-1.15.3-cp35-cp35m-manylinux1_x86_64.whl (13.8MB)
+    100% |████████████████████████████████| 13.8MB 83kB/s 
+Collecting requests>=2.0 (from gym[atari])
+  Using cached https://files.pythonhosted.org/packages/f1/ca/10332a30cb25b627192b4ea272c351bce3ca1091e541245cccbace6051d8/requests-2.20.0-py2.py3-none-any.whl
+Collecting six (from gym[atari])
+  Using cached https://files.pythonhosted.org/packages/67/4b/141a581104b1f6397bfa78ac9d43d8ad29a7ca43ea90a2d863fe3056e86a/six-1.11.0-py2.py3-none-any.whl
+Collecting pyglet>=1.2.0 (from gym[atari])
+  Using cached https://files.pythonhosted.org/packages/1c/fc/dad5eaaab68f0c21e2f906a94ddb98175662cc5a654eee404d59554ce0fa/pyglet-1.3.2-py2.py3-none-any.whl
+Collecting atari_py>=0.1.4 (from gym[atari])
+  Downloading https://files.pythonhosted.org/packages/16/cc/aabbe1580df0f9b22851e210d5e35e3faa305d10a8783997fb8e79239dbc/atari_py-0.1.6-py3-none-manylinux1_x86_64.whl (1.7MB)
+    100% |████████████████████████████████| 1.7MB 93kB/s 
+Collecting Pillow (from gym[atari])
+  Downloading https://files.pythonhosted.org/packages/bc/cc/b6e47b0075ca4267855d77850af7ea4194d2fc591664f1d70e5151b50637/Pillow-5.3.0-cp35-cp35m-manylinux1_x86_64.whl (2.0MB)
+    100% |████████████████████████████████| 2.0MB 144kB/s 
+Collecting PyOpenGL (from gym[atari])
+  Downloading https://files.pythonhosted.org/packages/9c/1d/4544708aaa89f26c97cc09450bb333a23724a320923e74d73e028b3560f9/PyOpenGL-3.1.0.tar.gz (1.2MB)
+    100% |████████████████████████████████| 1.2MB 162kB/s 
+Collecting urllib3<1.25,>=1.21.1 (from requests>=2.0->gym[atari])
+  Using cached https://files.pythonhosted.org/packages/8c/4b/5cbc4cb46095f369117dcb751821e1bef9dd86a07c968d8757e9204c324c/urllib3-1.24-py2.py3-none-any.whl
+Collecting chardet<3.1.0,>=3.0.2 (from requests>=2.0->gym[atari])
+  Downloading https://files.pythonhosted.org/packages/bc/a9/01ffebfb562e4274b6487b4bb1ddec7ca55ec7510b22e4c51f14098443b8/chardet-3.0.4-py2.py3-none-any.whl (133kB)
+    100% |████████████████████████████████| 143kB 136kB/s 
+Requirement already satisfied: certifi>=2017.4.17 in /home/jack/miniconda3/envs/universe-starter-agent/lib/python3.5/site-packages (from requests>=2.0->gym[atari]) (2018.8.24)
+Collecting idna<2.8,>=2.5 (from requests>=2.0->gym[atari])
+  Downloading https://files.pythonhosted.org/packages/4b/2a/0276479a4b3caeb8a8c1af2f8e4355746a97fab05a372e4a2c6a6b876165/idna-2.7-py2.py3-none-any.whl (58kB)
+    100% |████████████████████████████████| 61kB 97kB/s 
+Collecting future (from pyglet>=1.2.0->gym[atari])
+  Using cached https://files.pythonhosted.org/packages/90/52/e20466b85000a181e1e144fd8305caf2cf475e2f9674e797b222f8105f5f/future-0.17.1.tar.gz
+Building wheels for collected packages: gym, PyOpenGL, future
+  Running setup.py bdist_wheel for gym ... done
+  Stored in directory: /home/jack/.cache/pip/wheels/ea/ec/dd/33bcc8801d345f0b640fced8a0864a7c8474828564bc5ccf70
+  Running setup.py bdist_wheel for PyOpenGL ... done
+  Stored in directory: /home/jack/.cache/pip/wheels/6c/00/7f/1dd736f380848720ad79a1a1de5272e0d3f79c15a42968fb58
+  Running setup.py bdist_wheel for future ... done
+  Stored in directory: /home/jack/.cache/pip/wheels/0c/61/d2/d6b7317325828fbb39ee6ad559dbe4664d0896da4721bf379e
+Successfully built gym PyOpenGL future
+Installing collected packages: numpy, scipy, urllib3, chardet, idna, requests, six, future, pyglet, atari-py, Pillow, PyOpenGL, gym
+Successfully installed Pillow-5.3.0 PyOpenGL-3.1.0 atari-py-0.1.6 chardet-3.0.4 future-0.17.1 gym-0.10.8 idna-2.7 numpy-1.15.3 pyglet-1.3.2 requests-2.20.0 scipy-1.1.0 six-1.11.0 urllib3-1.24
+You are using pip version 10.0.1, however version 18.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+Collecting universe
+  Downloading https://files.pythonhosted.org/packages/5b/5e/26ee56c16cdc83a07a3251e3425856f2ade84928de55b3fa11590ce2b912/universe-0.21.3.tar.gz (136kB)
+    100% |████████████████████████████████| 143kB 114kB/s 
+Collecting autobahn>=0.16.0 (from universe)
+  Downloading https://files.pythonhosted.org/packages/48/e6/2bab8d8ec8ed58e0c7846ad855379d22371a0e892fd1dcc20229b9016588/autobahn-18.10.1-py2.py3-none-any.whl (299kB)
+    100% |████████████████████████████████| 307kB 135kB/s 
+Collecting docker-py==1.10.3 (from universe)
+  Downloading https://files.pythonhosted.org/packages/20/10/5234c4fa9710a04184586d877d028a51dc395a1867c3d4317438514dff77/docker_py-1.10.3-py2.py3-none-any.whl (48kB)
+    100% |████████████████████████████████| 51kB 162kB/s 
+Collecting docker-pycreds==0.2.1 (from universe)
+  Downloading https://files.pythonhosted.org/packages/ff/ec/14e976222468249cc50df4a031e5922581747b52dc96a0b1d5d73fee8f0e/docker_pycreds-0.2.1-py2.py3-none-any.whl
+Collecting fastzbarlight>=0.0.13 (from universe)
+  Downloading https://files.pythonhosted.org/packages/2b/f6/b46fe453ab12ac08c6a15808d402963819f26d4bd9daa5a899f6a3bae22d/fastzbarlight-0.0.14.tar.gz (728kB)
+    100% |████████████████████████████████| 737kB 222kB/s 
+Collecting go-vncdriver>=0.4.8 (from universe)
+  Downloading https://files.pythonhosted.org/packages/26/29/5a3036974ac2d86991a806d0136c1437b851ec61481694b8b6adeafde81b/go_vncdriver-0.4.19.tar.gz (638kB)
+    100% |████████████████████████████████| 645kB 304kB/s 
+Collecting gym<0.8,>=0.7 (from universe)
+  Downloading https://files.pythonhosted.org/packages/f2/af/15bc80c507108cf6de27fd356bb5939ba64b437610412e48b186ee0dedfd/gym-0.7.4.tar.gz (152kB)
+    100% |████████████████████████████████| 153kB 287kB/s 
+Requirement already satisfied: Pillow>=3.3.0 in /home/jack/miniconda3/envs/universe-starter-agent/lib/python3.5/site-packages (from universe) (5.3.0)
+Collecting PyYAML>=3.12 (from universe)
+  Downloading https://files.pythonhosted.org/packages/9e/a3/1d13970c3f36777c583f136c136f804d70f500168edc1edea6daa7200769/PyYAML-3.13.tar.gz (270kB)
+    100% |████████████████████████████████| 276kB 281kB/s 
+Requirement already satisfied: six>=1.10.0 in /home/jack/miniconda3/envs/universe-starter-agent/lib/python3.5/site-packages (from universe) (1.11.0)
+Collecting twisted>=16.5.0 (from universe)
+  Downloading https://files.pythonhosted.org/packages/5d/0e/a72d85a55761c2c3ff1cb968143a2fd5f360220779ed90e0fadf4106d4f2/Twisted-18.9.0.tar.bz2 (3.1MB)
+    100% |████████████████████████████████| 3.1MB 269kB/s 
+Collecting ujson>=1.35 (from universe)
+  Downloading https://files.pythonhosted.org/packages/16/c4/79f3409bc710559015464e5f49b9879430d8f87498ecdc335899732e5377/ujson-1.35.tar.gz (192kB)
+    100% |████████████████████████████████| 194kB 272kB/s 
+Collecting txaio>=18.8.1 (from autobahn>=0.16.0->universe)
+  Downloading https://files.pythonhosted.org/packages/e9/6d/e1a6f7835cde86728e5bb1f577be9b2d7d273fdb33c286e70b087d418ded/txaio-18.8.1-py2.py3-none-any.whl
+Collecting requests<2.11,>=2.5.2 (from docker-py==1.10.3->universe)
+  Downloading https://files.pythonhosted.org/packages/99/b4/63d99ba8e189c47d906b43bae18af4396e336f2b1bfec86af31efe2d2cb8/requests-2.10.0-py2.py3-none-any.whl (506kB)
+    100% |████████████████████████████████| 512kB 2.8MB/s 
+Collecting websocket-client>=0.32.0 (from docker-py==1.10.3->universe)
+  Downloading https://files.pythonhosted.org/packages/14/d4/6a8cd4e7f67da465108c7cc0a307a1c5da7e2cdf497330b682069b1d4758/websocket_client-0.53.0-py2.py3-none-any.whl (198kB)
+    100% |████████████████████████████████| 204kB 301kB/s 
+Requirement already satisfied: numpy in /home/jack/miniconda3/envs/universe-starter-agent/lib/python3.5/site-packages (from go-vncdriver>=0.4.8->universe) (1.15.3)
+Requirement already satisfied: pyglet>=1.2.0 in /home/jack/miniconda3/envs/universe-starter-agent/lib/python3.5/site-packages (from gym<0.8,>=0.7->universe) (1.3.2)
+Collecting zope.interface>=4.4.2 (from twisted>=16.5.0->universe)
+  Downloading https://files.pythonhosted.org/packages/0c/dc/d715a3f2f9df4e0440e67b1dc654bcfb6dc11aac8296353eaf56164b8f01/zope.interface-4.6.0-cp35-cp35m-manylinux1_x86_64.whl (167kB)
+    100% |████████████████████████████████| 174kB 295kB/s 
+Collecting constantly>=15.1 (from twisted>=16.5.0->universe)
+  Downloading https://files.pythonhosted.org/packages/b9/65/48c1909d0c0aeae6c10213340ce682db01b48ea900a7d9fce7a7910ff318/constantly-15.1.0-py2.py3-none-any.whl
+Collecting incremental>=16.10.1 (from twisted>=16.5.0->universe)
+  Downloading https://files.pythonhosted.org/packages/f5/1d/c98a587dc06e107115cf4a58b49de20b19222c83d75335a192052af4c4b7/incremental-17.5.0-py2.py3-none-any.whl
+Collecting Automat>=0.3.0 (from twisted>=16.5.0->universe)
+  Downloading https://files.pythonhosted.org/packages/a3/86/14c16bb98a5a3542ed8fed5d74fb064a902de3bdd98d6584b34553353c45/Automat-0.7.0-py2.py3-none-any.whl
+Collecting hyperlink>=17.1.1 (from twisted>=16.5.0->universe)
+  Downloading https://files.pythonhosted.org/packages/a7/b6/84d0c863ff81e8e7de87cff3bd8fd8f1054c227ce09af1b679a8b17a9274/hyperlink-18.0.0-py2.py3-none-any.whl
+Collecting PyHamcrest>=1.9.0 (from twisted>=16.5.0->universe)
+  Downloading https://files.pythonhosted.org/packages/9a/d5/d37fd731b7d0e91afcc84577edeccf4638b4f9b82f5ffe2f8b62e2ddc609/PyHamcrest-1.9.0-py2.py3-none-any.whl (52kB)
+    100% |████████████████████████████████| 61kB 289kB/s 
+Collecting attrs>=17.4.0 (from twisted>=16.5.0->universe)
+  Downloading https://files.pythonhosted.org/packages/3a/e1/5f9023cc983f1a628a8c2fd051ad19e76ff7b142a0faf329336f9a62a514/attrs-18.2.0-py2.py3-none-any.whl
+Requirement already satisfied: future in /home/jack/miniconda3/envs/universe-starter-agent/lib/python3.5/site-packages (from pyglet>=1.2.0->gym<0.8,>=0.7->universe) (0.17.1)
+Requirement already satisfied: setuptools in /home/jack/miniconda3/envs/universe-starter-agent/lib/python3.5/site-packages (from zope.interface>=4.4.2->twisted>=16.5.0->universe) (40.2.0)
+Requirement already satisfied: idna>=2.5 in /home/jack/miniconda3/envs/universe-starter-agent/lib/python3.5/site-packages (from hyperlink>=17.1.1->twisted>=16.5.0->universe) (2.7)
+Building wheels for collected packages: universe, fastzbarlight, go-vncdriver, gym, PyYAML, twisted, ujson
+  Running setup.py bdist_wheel for universe ... done
+  Stored in directory: /home/jack/.cache/pip/wheels/65/71/6f/d7604d1848e86ea29abcbd111086a74de6cc5506bfae8a4619
+  Running setup.py bdist_wheel for fastzbarlight ... done
+  Stored in directory: /home/jack/.cache/pip/wheels/66/49/ce/1ad00cfb42897cdcdedf5239c05609ab58dbcadb3d3399d42a
+  Running setup.py bdist_wheel for go-vncdriver ... done
+  Stored in directory: /home/jack/.cache/pip/wheels/55/8b/0d/762063050e3fa7b41ba7c4f9c776d42f343f4783e23e8c351a
+  Running setup.py bdist_wheel for gym ... done
+  Stored in directory: /home/jack/.cache/pip/wheels/e2/0e/9a/758e93d957d3665bdeafb3e04837e063fff8279151f34d651d
+  Running setup.py bdist_wheel for PyYAML ... done
+  Stored in directory: /home/jack/.cache/pip/wheels/ad/da/0c/74eb680767247273e2cf2723482cb9c924fe70af57c334513f
+  Running setup.py bdist_wheel for twisted ... done
+  Stored in directory: /home/jack/.cache/pip/wheels/57/2e/89/11ba83bc08ac30a5e3a6005f0310c78d231b96a270def88ca0
+  Running setup.py bdist_wheel for ujson ... done
+  Stored in directory: /home/jack/.cache/pip/wheels/28/77/e4/0311145b9c2e2f01470e744855131f9e34d6919687550f87d1
+Successfully built universe fastzbarlight go-vncdriver gym PyYAML twisted ujson
+Installing collected packages: txaio, autobahn, requests, websocket-client, docker-pycreds, docker-py, fastzbarlight, go-vncdriver, gym, PyYAML, zope.interface, constantly, incremental, attrs, Automat, hyperlink, PyHamcrest, twisted, ujson, universe
+  Found existing installation: requests 2.20.0
+    Uninstalling requests-2.20.0:
+      Successfully uninstalled requests-2.20.0
+  Found existing installation: gym 0.10.8
+    Uninstalling gym-0.10.8:
+      Successfully uninstalled gym-0.10.8
+Successfully installed Automat-0.7.0 PyHamcrest-1.9.0 PyYAML-3.13 attrs-18.2.0 autobahn-18.10.1 constantly-15.1.0 docker-py-1.10.3 docker-pycreds-0.2.1 fastzbarlight-0.0.14 go-vncdriver-0.4.19 gym-0.7.4 hyperlink-18.0.0 incremental-17.5.0 requests-2.10.0 twisted-18.9.0 txaio-18.8.1 ujson-1.35 universe-0.21.3 websocket-client-0.53.0 zope.interface-4.6.0
+You are using pip version 10.0.1, however version 18.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+Requirement already satisfied: six in /home/jack/miniconda3/envs/universe-starter-agent/lib/python3.5/site-packages (1.11.0)
+You are using pip version 10.0.1, however version 18.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+Collecting tensorflow
+  Downloading https://files.pythonhosted.org/packages/3d/f1/6acf8dddd9831282cb4044a3a789c6234d6174b4b1165f31baaf788ade29/tensorflow-1.11.0-cp35-cp35m-manylinux1_x86_64.whl (63.0MB)
+    100% |████████████████████████████████| 63.0MB 171kB/s 
+Collecting keras-applications>=1.0.5 (from tensorflow)
+  Downloading https://files.pythonhosted.org/packages/3f/c4/2ff40221029f7098d58f8d7fb99b97e8100f3293f9856f0fb5834bef100b/Keras_Applications-1.0.6-py2.py3-none-any.whl (44kB)
+    100% |████████████████████████████████| 51kB 286kB/s 
+Collecting grpcio>=1.8.6 (from tensorflow)
+  Downloading https://files.pythonhosted.org/packages/75/8b/b8db0b4a855b1b959313fe4aa6e0704e2c05bef00e47d7b563112e40a704/grpcio-1.16.0-cp35-cp35m-manylinux1_x86_64.whl (9.7MB)
+    100% |████████████████████████████████| 9.7MB 272kB/s 
+Requirement already satisfied: wheel>=0.26 in /home/jack/miniconda3/envs/universe-starter-agent/lib/python3.5/site-packages (from tensorflow) (0.31.1)
+Collecting setuptools<=39.1.0 (from tensorflow)
+  Downloading https://files.pythonhosted.org/packages/8c/10/79282747f9169f21c053c562a0baa21815a8c7879be97abd930dbcf862e8/setuptools-39.1.0-py2.py3-none-any.whl (566kB)
+    100% |████████████████████████████████| 573kB 261kB/s 
+Collecting astor>=0.6.0 (from tensorflow)
+  Downloading https://files.pythonhosted.org/packages/35/6b/11530768cac581a12952a2aad00e1526b89d242d0b9f59534ef6e6a1752f/astor-0.7.1-py2.py3-none-any.whl
+Collecting termcolor>=1.1.0 (from tensorflow)
+  Downloading https://files.pythonhosted.org/packages/8a/48/a76be51647d0eb9f10e2a4511bf3ffb8cc1e6b14e9e4fab46173aa79f981/termcolor-1.1.0.tar.gz
+Requirement already satisfied: six>=1.10.0 in /home/jack/miniconda3/envs/universe-starter-agent/lib/python3.5/site-packages (from tensorflow) (1.11.0)
+Collecting absl-py>=0.1.6 (from tensorflow)
+  Downloading https://files.pythonhosted.org/packages/0c/63/f505d2d4c21db849cf80bad517f0065a30be6b006b0a5637f1b95584a305/absl-py-0.6.1.tar.gz (94kB)
+    100% |████████████████████████████████| 102kB 274kB/s 
+Collecting protobuf>=3.6.0 (from tensorflow)
+  Downloading https://files.pythonhosted.org/packages/bf/d4/db7296a1407cad69f043537ba1e05afab3646451a066ead7a314d8714388/protobuf-3.6.1-cp35-cp35m-manylinux1_x86_64.whl (1.1MB)
+    100% |████████████████████████████████| 1.1MB 259kB/s 
+Collecting tensorboard<1.12.0,>=1.11.0 (from tensorflow)
+  Downloading https://files.pythonhosted.org/packages/9b/2f/4d788919b1feef04624d63ed6ea45a49d1d1c834199ec50716edb5d310f4/tensorboard-1.11.0-py3-none-any.whl (3.0MB)
+    100% |████████████████████████████████| 3.0MB 260kB/s 
+Collecting gast>=0.2.0 (from tensorflow)
+  Downloading https://files.pythonhosted.org/packages/5c/78/ff794fcae2ce8aa6323e789d1f8b3b7765f601e7702726f430e814822b96/gast-0.2.0.tar.gz
+Collecting keras-preprocessing>=1.0.3 (from tensorflow)
+  Downloading https://files.pythonhosted.org/packages/fc/94/74e0fa783d3fc07e41715973435dd051ca89c550881b3454233c39c73e69/Keras_Preprocessing-1.0.5-py2.py3-none-any.whl
+Requirement already satisfied: numpy>=1.13.3 in /home/jack/miniconda3/envs/universe-starter-agent/lib/python3.5/site-packages (from tensorflow) (1.15.3)
+Collecting h5py (from keras-applications>=1.0.5->tensorflow)
+  Cache entry deserialization failed, entry ignored
+  Downloading https://files.pythonhosted.org/packages/d9/0a/f0dd6d533d6b5bd4c1ca186af2792186885a90b84df41f3e6867466761fc/h5py-2.8.0-cp35-cp35m-manylinux1_x86_64.whl (2.8MB)
+    100% |████████████████████████████████| 2.8MB 286kB/s 
+Collecting markdown>=2.6.8 (from tensorboard<1.12.0,>=1.11.0->tensorflow)
+  Downloading https://files.pythonhosted.org/packages/7a/6b/5600647404ba15545ec37d2f7f58844d690baf2f81f3a60b862e48f29287/Markdown-3.0.1-py2.py3-none-any.whl (89kB)
+    100% |████████████████████████████████| 92kB 257kB/s 
+Collecting werkzeug>=0.11.10 (from tensorboard<1.12.0,>=1.11.0->tensorflow)
+  Downloading https://files.pythonhosted.org/packages/20/c4/12e3e56473e52375aa29c4764e70d1b8f3efa6682bef8d0aae04fe335243/Werkzeug-0.14.1-py2.py3-none-any.whl (322kB)
+    100% |████████████████████████████████| 327kB 314kB/s 
+Building wheels for collected packages: termcolor, absl-py, gast
+  Running setup.py bdist_wheel for termcolor ... done
+  Stored in directory: /home/jack/.cache/pip/wheels/7c/06/54/bc84598ba1daf8f970247f550b175aaaee85f68b4b0c5ab2c6
+  Running setup.py bdist_wheel for absl-py ... done
+  Stored in directory: /home/jack/.cache/pip/wheels/18/ea/5e/e36e1b8739e78cd2eba0a08fdc602c2b16a4b263912af8cb64
+  Running setup.py bdist_wheel for gast ... done
+  Stored in directory: /home/jack/.cache/pip/wheels/9a/1f/0e/3cde98113222b853e98fc0a8e9924480a3e25f1b4008cedb4f
+Successfully built termcolor absl-py gast
+Installing collected packages: h5py, keras-applications, grpcio, setuptools, astor, termcolor, absl-py, protobuf, markdown, werkzeug, tensorboard, gast, keras-preprocessing, tensorflow
+  Found existing installation: setuptools 40.2.0
+    Uninstalling setuptools-40.2.0:
+      Successfully uninstalled setuptools-40.2.0
+Successfully installed absl-py-0.6.1 astor-0.7.1 gast-0.2.0 grpcio-1.16.0 h5py-2.8.0 keras-applications-1.0.6 keras-preprocessing-1.0.5 markdown-3.0.1 protobuf-3.6.1 setuptools-39.1.0 tensorboard-1.11.0 tensorflow-1.11.0 termcolor-1.1.0 werkzeug-0.14.1
+You are using pip version 10.0.1, however version 18.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+Solving environment: done
+
+## Package Plan ##
+  environment location: /home/jack/miniconda3/envs/universe-starter-agent
+  added / updated specs: 
+    - opencv3
+The following packages will be downloaded:
+    package                    |            build
+    ---------------------------|-----------------
+    icu-58.2                   |       h9c2bf20_1        22.5 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libuuid-1.0.3              |       h1bed415_2          16 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libxml2-2.9.8              |       h26e45fe_1         2.0 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    opencv3-3.2.0              |      np111py35_0        22.2 MB  https://conda.binstar.org/menpo
+    fontconfig-2.13.0          |       h9420a91_0         291 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libpng-1.6.35              |       hbc83047_0         335 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    pcre-8.42                  |       h439df22_0         251 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    pixman-0.34.0              |       hceecf20_3         598 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    blas-1.0                   |              mkl           6 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    glib-2.56.2                |       hd408876_0         5.0 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    cairo-1.14.12              |       h8948797_3         1.3 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    hdf5-1.8.17                |                2         2.0 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
+    freetype-2.9.1             |       h8a8886c_1         822 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    numpy-1.11.3               |   py35h3dfced4_4         3.5 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    harfbuzz-0.9.39            |                1         1.1 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
+    libxcb-1.13                |       h1bed415_1         502 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    intel-openmp-2019.0        |              118         721 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libgfortran-ng-7.3.0       |       hdf63c60_0         1.3 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libtiff-4.0.9              |       he85c1e1_2         567 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    jpeg-9b                    |       h024ee3a_2         248 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    mkl-2019.0                 |              118       204.4 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    ------------------------------------------------------------
+                                           Total:       269.4 MB
+
+The following NEW packages will be INSTALLED:
+
+    blas:           1.0-mkl               https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    cairo:          1.14.12-h8948797_3    https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    fontconfig:     2.13.0-h9420a91_0     https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    freetype:       2.9.1-h8a8886c_1      https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    glib:           2.56.2-hd408876_0     https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    harfbuzz:       0.9.39-1              https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
+    hdf5:           1.8.17-2              https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
+    icu:            58.2-h9c2bf20_1       https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    intel-openmp:   2019.0-118            https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    jpeg:           9b-h024ee3a_2         https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libgfortran-ng: 7.3.0-hdf63c60_0      https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libpng:         1.6.35-hbc83047_0     https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libtiff:        4.0.9-he85c1e1_2      https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libuuid:        1.0.3-h1bed415_2      https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libxcb:         1.13-h1bed415_1       https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    libxml2:        2.9.8-h26e45fe_1      https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    mkl:            2019.0-118            https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    numpy:          1.11.3-py35h3dfced4_4 https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    opencv3:        3.2.0-np111py35_0     https://conda.binstar.org/menpo                        
+    pcre:           8.42-h439df22_0       https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    pixman:         0.34.0-hceecf20_3     https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+
+
+Downloading and Extracting Packages
+icu-58.2             | 22.5 MB   | ########################################################################################################## | 100% 
+libuuid-1.0.3        | 16 KB     | ########################################################################################################## | 100% 
+libxml2-2.9.8        | 2.0 MB    | ########################################################################################################## | 100% 
+opencv3-3.2.0        | 22.2 MB   | ########################################################################################################## | 100% 
+fontconfig-2.13.0    | 291 KB    | ########################################################################################################## | 100% 
+libpng-1.6.35        | 335 KB    | ########################################################################################################## | 100% 
+pcre-8.42            | 251 KB    | ########################################################################################################## | 100% 
+pixman-0.34.0        | 598 KB    | ########################################################################################################## | 100% 
+blas-1.0             | 6 KB      | ########################################################################################################## | 100% 
+glib-2.56.2          | 5.0 MB    | ########################################################################################################## | 100% 
+cairo-1.14.12        | 1.3 MB    | ########################################################################################################## | 100% 
+hdf5-1.8.17          | 2.0 MB    | ########################################################################################################## | 100% 
+freetype-2.9.1       | 822 KB    | ########################################################################################################## | 100% 
+numpy-1.11.3         | 3.5 MB    | ########################################################################################################## | 100% 
+harfbuzz-0.9.39      | 1.1 MB    | ########################################################################################################## | 100% 
+libxcb-1.13          | 502 KB    | ########################################################################################################## | 100% 
+intel-openmp-2019.0  | 721 KB    | ########################################################################################################## | 100% 
+libgfortran-ng-7.3.0 | 1.3 MB    | ########################################################################################################## | 100% 
+libtiff-4.0.9        | 567 KB    | ########################################################################################################## | 100% 
+jpeg-9b              | 248 KB    | ########################################################################################################## | 100% 
+mkl-2019.0           | 204.4 MB  | ########################################################################################################## | 100% 
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+Solving environment: done
+
+## Package Plan ##
+  environment location: /home/jack/miniconda3/envs/universe-starter-agent
+  added / updated specs: 
+    - numpy
+The following packages will be downloaded:
+    package                    |            build
+    ---------------------------|-----------------
+    numpy-base-1.11.3          |  py35h81de0dd_10         3.5 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    numpy-1.11.3               |  py35h1d66e8a_10          11 KB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+    ------------------------------------------------------------
+                                           Total:         3.5 MB
+The following NEW packages will be INSTALLED:
+    numpy-base: 1.11.3-py35h81de0dd_10 https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+The following packages will be UPDATED:
+    numpy:      1.11.3-py35h3dfced4_4  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main --> 1.11.3-py35h1d66e8a_10 https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+Downloading and Extracting Packages
+numpy-base-1.11.3    | 3.5 MB    | ########################################################################################################## | 100% 
+numpy-1.11.3         | 11 KB     | ########################################################################################################## | 100% 
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+Solving environment: done
+
+## Package Plan ##
+  environment location: /home/jack/miniconda3/envs/universe-starter-agent
+  added / updated specs: 
+    - scipy
+The following packages will be downloaded:
+    package                    |            build
+    ---------------------------|-----------------
+    scipy-1.1.0                |   py35hd20e5f9_0        18.0 MB  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+The following NEW packages will be INSTALLED:
+    scipy: 1.1.0-py35hd20e5f9_0 https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+Downloading and Extracting Packages
+scipy-1.1.0          | 18.0 MB   | ########################################################################################################## | 100% 
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+</pre>
+<p>
+conda install nb_conda<br />
+conda info nb_conda<br />
+python -m ipykernel install --user --name  --display-name 'Python(UNIVERSE)'<br />
+
+</p>
+</body>
+</html>
