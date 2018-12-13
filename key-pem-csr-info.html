@@ -32,7 +32,7 @@ Email Address []:jack@yahoo.com
 
 Please enter the following 'extra' attributes
 to be sent with your certificate request
-A challenge password []:ThinkPadT$#
+A challenge password []: XXXXX
 An optional company name []:BlogBlocksOrg
 jack@jack-desktop:~$ openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem
 Signature ok
@@ -230,23 +230,7 @@ Certificate:
             Public Key Algorithm: rsaEncryption
                 Public-Key: (2048 bit)
                 Modulus:
-                    00:d9:b0:72:8a:03:ad:fe:98:42:5f:a5:cc:3a:ef:
-                    fb:7e:22:0c:52:b8:87:9f:1e:1d:50:62:f4:52:fe:
-                    41:c1:ac:a2:22:57:13:6f:8b:8e:92:8e:ad:e0:60:
-                    b2:65:18:63:17:13:4e:18:01:eb:6c:0f:ec:0c:20:
-                    41:49:b3:6c:3b:e8:cf:44:80:c6:58:e0:9b:9e:ed:
-                    21:fe:d8:b0:3e:aa:ba:57:e8:88:b2:a1:4d:10:83:
-                    f7:72:6d:69:52:a3:d2:3f:57:ed:5f:53:32:95:ef:
-                    b0:28:20:81:39:b9:b0:1b:03:5e:fc:e0:c4:a5:ab:
-                    5c:9a:21:70:8d:46:47:78:ff:94:52:51:8e:89:0f:
-                    c4:9f:30:57:76:bd:b5:cc:a7:be:4c:74:88:ab:71:
-                    18:e5:55:6d:33:c6:8b:06:90:fa:c2:ad:83:36:35:
-                    81:29:35:29:5b:a5:27:8e:03:cc:e3:3d:ff:73:02:
-                    28:4e:86:36:b6:fa:75:d9:df:51:fd:a6:3d:e0:44:
-                    71:1f:c5:a6:0d:41:a2:1e:59:c9:70:81:d6:79:f7:
-                    11:a8:4b:45:ee:31:ca:e5:e5:5c:f8:bf:b3:21:aa:
-                    9b:65:0a:94:8f:57:df:9a:f8:d7:f0:f5:7f:99:9f:
-                    ff:05:05:d5:b7:aa:de:6a:31:a2:54:49:bc:32:08:
+                    
                     70:77
                 Exponent: 65537 (0x10001)
         X509v3 extensions:
@@ -258,20 +242,7 @@ Certificate:
             X509v3 Basic Constraints: 
                 CA:TRUE
     Signature Algorithm: sha256WithRSAEncryption
-         85:5a:be:27:71:0a:5d:10:89:c7:20:42:3e:20:c6:0b:70:50:
-         1d:b6:29:ef:73:e3:14:cb:26:e6:9a:5e:25:2f:20:42:50:df:
-         43:42:82:8a:51:b2:27:5f:d3:f3:05:3d:ac:8d:91:e0:86:3e:
-         f2:c2:9b:15:d4:fe:d1:13:7e:93:40:7f:7c:49:fc:6b:da:fe:
-         e8:40:62:26:26:38:c3:82:71:35:e6:33:09:41:e1:53:ea:8f:
-         1f:59:56:57:7d:4f:3b:95:9c:b0:ca:f9:cd:d8:b5:34:40:75:
-         5a:96:1b:01:73:db:4e:a5:14:b2:bc:1a:87:8d:14:92:f2:fb:
-         c2:d7:de:34:83:60:9c:dc:5d:c2:ee:1a:7e:b9:0d:b3:a3:65:
-         a3:a5:2d:a2:a4:30:4a:d4:e4:89:af:8e:14:5f:04:03:d9:60:
-         bf:65:7e:00:84:57:08:31:84:58:65:d6:5d:12:80:7a:74:44:
-         2e:59:7a:ad:e2:45:c9:61:ad:5b:fd:75:7a:37:57:b7:a3:5b:
-         24:28:0b:13:cf:f7:55:46:ff:86:e6:f7:92:c8:80:6f:9d:5c:
-         bb:f7:d6:cc:d2:a5:5e:00:2b:f2:63:71:76:db:e7:9f:17:11:
-         01:92:58:d5:46:3e:82:ba:71:44:42:3c:b8:a1:a7:4c:44:90:
+         
          c9:4d:5f:93
 root@72efce76df14:/# openssl pkcs12 -inkey key.pem -in certificate.pem -export -out certificate.p12
 Enter Export Password:
